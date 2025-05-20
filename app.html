@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翻译应用</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 现代化样式 -->
+    <link rel="stylesheet" href="modern-styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#4f46e5',
+                            600: '#4338ca',
+                            700: '#3730a3'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-language"></i>
+            <span>松果翻译</span>
+        </div>
+        <div class="nav-item" data-link="basic.html">
+            <i class="fas fa-language"></i>
+            <span>基础翻译</span>
+        </div>
+        <div class="nav-item active" data-link="app.html">
+            <i class="fas fa-th-large"></i>
+            <span>翻译应用</span>
+        </div>
+        <div class="nav-item" data-link="#">
+            <i class="fas fa-history"></i>
+            <span>历史记录</span>
+        </div>
+        <div class="nav-item" data-link="#">
+            <i class="fas fa-bookmark"></i>
+            <span>收藏夹</span>
+        </div>
+        <div class="nav-item" data-link="#">
+            <i class="fas fa-cog"></i>
+            <span>设置</span>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="main-content">
+        <!-- 顶部导航栏 -->
+        <div class="flex justify-between items-center mb-8">
+            <div class="animate-on-scroll">
+                <h1 class="text-3xl font-bold mb-2 text-gray-800">翻译应用</h1>
+                <p class="text-gray-600">选择合适的翻译工具，提高工作效率</p>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <!-- 搜索栏 -->
+                <div class="search-bar w-64">
+                    <i class="fas fa-search text-gray-400"></i>
+                    <input type="text" placeholder="搜索应用...">
+                    <div class="user-actions">
+                        <i class="fas fa-bell notification"></i>
+                        <div class="avatar ml-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 应用分类标签 -->
+        <div class="flex flex-wrap gap-2 mb-8 animate-on-scroll" id="app-categories">
+            <button class="btn btn-primary category-btn" data-category="all">全部应用</button>
+            <button class="btn btn-light category-btn" data-category="common">常用工具</button>
+            <button class="btn btn-light category-btn" data-category="document">文档翻译</button>
+            <button class="btn btn-light category-btn" data-category="voice">语音翻译</button>
+            <button class="btn btn-light category-btn" data-category="image">图像翻译</button>
+        </div>
+
+        <!-- 应用卡片网格 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
+            <!-- 应用卡片1 -->
+            <div class="card app-card hover:border-primary-500 group cursor-pointer animate-on-scroll" data-id="1" data-category="document,common">
+                <div class="flex items-start mb-4">
+                    <div class="w-14 h-14 rounded-xl bg-primary-100 text-primary-500 flex items-center justify-center mr-4">
+                        <i class="fas fa-pencil-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold mb-1">文档翻译</h3>
+                            <span class="badge badge-primary text-xs">热门</span>
+                        </div>
+                        <p class="text-sm text-gray-500">支持多种文档格式翻译</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-100 pt-3 mt-2 flex justify-between items-center">
+                    <div class="text-xs text-gray-500">上次使用: 2天前</div>
+                    <button class="btn-icon btn-light group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 应用卡片2 -->
+            <div class="card app-card hover:border-primary-500 group cursor-pointer animate-on-scroll" data-id="2" data-category="common">
+                <div class="flex items-start mb-4">
+                    <div class="w-14 h-14 rounded-xl bg-blue-100 text-blue-500 flex items-center justify-center mr-4">
+                        <i class="fas fa-desktop text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold mb-1">网页翻译</h3>
+                            <span class="badge badge-success text-xs">新功能</span>
+                        </div>
+                        <p class="text-sm text-gray-500">实时翻译网页内容</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-100 pt-3 mt-2 flex justify-between items-center">
+                    <div class="text-xs text-gray-500">上次使用: 1周前</div>
+                    <button class="btn-icon btn-light group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 应用卡片3 -->
+            <div class="card app-card hover:border-primary-500 group cursor-pointer animate-on-scroll" data-id="3" data-category="common">
+                <div class="flex items-start mb-4">
+                    <div class="w-14 h-14 rounded-xl bg-green-100 text-green-500 flex items-center justify-center mr-4">
+                        <i class="fas fa-globe text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold mb-1">API接入</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">为应用提供翻译能力</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-100 pt-3 mt-2 flex justify-between items-center">
+                    <div class="text-xs text-gray-500">上次使用: 3天前</div>
+                    <button class="btn-icon btn-light group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 应用卡片4 -->
+            <div class="card app-card hover:border-primary-500 group cursor-pointer animate-on-scroll" data-id="4" data-category="common">
+                <div class="flex items-start mb-4">
+                    <div class="w-14 h-14 rounded-xl bg-yellow-100 text-yellow-500 flex items-center justify-center mr-4">
+                        <i class="fas fa-lightbulb text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold mb-1">智能助手</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">AI驱动的翻译建议</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-100 pt-3 mt-2 flex justify-between items-center">
+                    <div class="text-xs text-gray-500">上次使用: 刚刚</div>
+                    <button class="btn-icon btn-light group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 应用卡片5 -->
+            <div class="card app-card hover:border-primary-500 group cursor-pointer animate-on-scroll" data-id="5" data-category="voice">
+                <div class="flex items-start mb-4">
+                    <div class="w-14 h-14 rounded-xl bg-purple-100 text-purple-500 flex items-center justify-center mr-4">
+                        <i class="fas fa-microphone text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold mb-1">语音翻译</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">实时语音转文字翻译</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-100 pt-3 mt-2 flex justify-between items-center">
+                    <div class="text-xs text-gray-500">上次使用: 1天前</div>
+                    <button class="btn-icon btn-light group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 应用卡片6 -->
+            <div class="card app-card hover:border-primary-500 group cursor-pointer animate-on-scroll" data-id="6" data-category="image">
+                <div class="flex items-start mb-4">
+                    <div class="w-14 h-14 rounded-xl bg-red-100 text-red-500 flex items-center justify-center mr-4">
+                        <i class="fas fa-camera text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold mb-1">图像翻译</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">识别图片中的文字并翻译</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-100 pt-3 mt-2 flex justify-between items-center">
+                    <div class="text-xs text-gray-500">上次使用: 5天前</div>
+                    <button class="btn-icon btn-light group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 应用卡片7 -->
+            <div class="card app-card hover:border-primary-500 group cursor-pointer animate-on-scroll" data-id="7" data-category="document">
+                <div class="flex items-start mb-4">
+                    <div class="w-14 h-14 rounded-xl bg-indigo-100 text-indigo-500 flex items-center justify-center mr-4">
+                        <i class="fas fa-file-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold mb-1">批量翻译</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">同时处理多个文件</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-100 pt-3 mt-2 flex justify-between items-center">
+                    <div class="text-xs text-gray-500">上次使用: 2周前</div>
+                    <button class="btn-icon btn-light group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 应用卡片8 -->
+            <div class="card app-card hover:border-primary-500 group cursor-pointer animate-on-scroll" data-id="8" data-category="document">
+                <div class="flex items-start mb-4">
+                    <div class="w-14 h-14 rounded-xl bg-teal-100 text-teal-500 flex items-center justify-center mr-4">
+                        <i class="fas fa-code text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold mb-1">代码翻译</h3>
+                            <span class="badge badge-warning text-xs">测试版</span>
+                        </div>
+                        <p class="text-sm text-gray-500">翻译代码注释和文档</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-100 pt-3 mt-2 flex justify-between items-center">
+                    <div class="text-xs text-gray-500">上次使用: 从未</div>
+                    <button class="btn-icon btn-light group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分页 -->
+        <div class="flex flex-col md:flex-row items-center justify-between mt-10 animate-on-scroll">
+            <div class="text-sm text-gray-500 mb-4 md:mb-0">
+                显示 <span class="font-medium">1-8</span> 共 <span class="font-medium">24</span> 个应用
+            </div>
+
+            <div class="flex items-center">
+                <div class="flex items-center mr-6">
+                    <label class="text-sm text-gray-500 mr-2">每页显示:</label>
+                    <select class="form-input py-1 px-2 w-16 text-sm">
+                        <option>8</option>
+                        <option>16</option>
+                        <option>24</option>
+                        <option>32</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center">
+                    <button class="btn btn-light py-1.5 px-3 mr-2">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+
+                    <div class="flex">
+                        <button class="btn btn-light py-1.5 px-3 mx-0.5">1</button>
+                        <button class="btn btn-primary py-1.5 px-3 mx-0.5">2</button>
+                        <button class="btn btn-light py-1.5 px-3 mx-0.5">3</button>
+                        <span class="flex items-center justify-center px-2">...</span>
+                        <button class="btn btn-light py-1.5 px-3 mx-0.5">8</button>
+                    </div>
+
+                    <button class="btn btn-light py-1.5 px-3 ml-2">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

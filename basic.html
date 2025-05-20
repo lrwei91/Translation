@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础翻译</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 现代化样式 -->
+    <link rel="stylesheet" href="modern-styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#4f46e5',
+                            600: '#4338ca',
+                            700: '#3730a3'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-language"></i>
+            <span>松果翻译</span>
+        </div>
+        <div class="nav-item active" data-link="basic.html">
+            <i class="fas fa-language"></i>
+            <span>基础翻译</span>
+        </div>
+        <div class="nav-item" data-link="app.html">
+            <i class="fas fa-th-large"></i>
+            <span>翻译应用</span>
+        </div>
+        <div class="nav-item" data-link="#">
+            <i class="fas fa-history"></i>
+            <span>历史记录</span>
+        </div>
+        <div class="nav-item" data-link="#">
+            <i class="fas fa-bookmark"></i>
+            <span>收藏夹</span>
+        </div>
+        <div class="nav-item" data-link="#">
+            <i class="fas fa-cog"></i>
+            <span>设置</span>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="main-content">
+        <!-- 顶部导航栏 -->
+        <div class="flex justify-between items-center mb-8">
+            <div class="animate-on-scroll">
+                <h1 class="text-3xl font-bold mb-2 text-gray-800">AI松果翻译</h1>
+                <p class="text-gray-600">快速准确的多语言翻译工具</p>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <!-- 搜索栏 -->
+                <div class="search-bar w-64">
+                    <i class="fas fa-search text-gray-400"></i>
+                    <input type="text" placeholder="搜索...">
+                    <div class="user-actions">
+                        <i class="fas fa-bell notification"></i>
+                        <div class="avatar ml-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 内容卡片 -->
+        <div class="card animate-on-scroll">
+
+            <h2 class="text-xl font-semibold mb-6 text-gray-800">语言选择</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">源语言</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="language-tag source active btn btn-primary">
+                            <i class="fas fa-check mr-1.5 text-xs"></i> 英语
+                        </button>
+                        <button class="language-tag source btn btn-light">
+                            简体中文
+                        </button>
+                        <button class="language-tag source btn btn-light">
+                            繁体中文
+                        </button>
+                        <button class="language-tag source btn btn-light">
+                            日语
+                        </button>
+                        <button class="language-tag source btn btn-light">
+                            韩语
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">目标语言</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="language-tag target btn btn-light">
+                            英语
+                        </button>
+                        <button class="language-tag target active btn btn-primary">
+                            <i class="fas fa-check mr-1.5 text-xs"></i> 简体中文
+                        </button>
+                        <button class="language-tag target btn btn-light">
+                            繁体中文
+                        </button>
+                        <button class="language-tag target btn btn-light">
+                            日语
+                        </button>
+                        <button class="language-tag target btn btn-light">
+                            韩语
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-6">
+                <button class="btn btn-light">
+                    <i class="fas fa-undo-alt mr-2"></i> 清除选择
+                </button>
+                <div class="badge badge-primary">翻译结果</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- 输入区域 -->
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <label class="block text-sm font-medium text-gray-700">输入文本</label>
+                        <div class="text-xs text-gray-500">支持多种语言输入</div>
+                    </div>
+                    <div class="relative">
+                        <textarea
+                            class="text-input w-full h-60 border border-gray-200 rounded-lg p-4 bg-white shadow-sm resize-none outline-none text-sm leading-relaxed focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-20 transition-all"
+                            placeholder="请输入需要翻译的内容..."
+                            oninput="updateInputCount(this)"></textarea>
+                        <div class="absolute bottom-3 right-3 text-gray-400 text-xs bg-white px-2 py-1 rounded-md shadow-sm">
+                            0/500 字符 | 0 词
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 输出区域 -->
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <label class="block text-sm font-medium text-gray-700">翻译结果</label>
+                        <div class="flex space-x-2">
+                            <button class="text-xs text-primary-500 hover:text-primary-600 transition-colors">
+                                <i class="fas fa-copy mr-1"></i> 复制
+                            </button>
+                            <button class="text-xs text-primary-500 hover:text-primary-600 transition-colors">
+                                <i class="fas fa-volume-up mr-1"></i> 朗读
+                            </button>
+                        </div>
+                    </div>
+                    <div class="translation-result border border-gray-200 rounded-lg p-4 bg-white shadow-sm h-60 overflow-auto text-sm leading-relaxed">
+                        <div class="text-gray-400 flex items-center justify-center h-full">
+                            <div class="text-center">
+                                <i class="fas fa-language text-4xl mb-2 text-gray-300"></i>
+                                <p>这里显示翻译结果...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-sm font-medium text-gray-700 mb-3">输出格式</label>
+                <div class="flex gap-6">
+                    <label class="format-option flex items-center cursor-pointer">
+                        <input type="radio" name="format" value="paragraph" checked class="mr-2 accent-primary-500">
+                        <span class="text-sm">段落翻译</span>
+                    </label>
+                    <label class="format-option flex items-center cursor-pointer">
+                        <input type="radio" name="format" value="line" class="mr-2 accent-primary-500">
+                        <span class="text-sm">行对行翻译</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center">
+                <button class="btn btn-light">
+                    <i class="fas fa-cog mr-2"></i> 高级设置
+                </button>
+
+                <!-- 翻译按钮 -->
+                <button class="btn btn-primary px-8 py-3" onclick="translateText()">
+                    <i class="fas fa-language mr-2"></i>
+                    <span class="font-medium">开始翻译</span>
+                </button>
+            </div>
+        </div> <!-- 卡片结束 -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
