@@ -499,15 +499,29 @@ function initTranslationButtons() {
 function initPagination() {
     // 获取所有页码按钮（包括数字和箭头）
     const pageButtons = document.querySelectorAll('.flex.items-center button');
-    // 获取每页显示数量选择器
-    const perPageSelect = document.querySelector('.form-input.py-1.px-2.w-16');
 
     if (pageButtons.length === 0) return;
 
     // 当前页码
-    let currentPage = 2; // 默认第2页是活动的
-    // 总页数
-    const totalPages = 8; // 根据UI中的最后一个页码按钮
+    let currentPage = 1; // 默认第1页是活动的
+
+    // 获取所有应用卡片
+    const appCards = document.querySelectorAll('.app-card');
+
+    // 每页显示的应用数量
+    const perPage = 8;
+
+    // 计算总页数
+    const totalPages = Math.ceil(appCards.length / perPage);
+
+    // 更新总应用数显示
+    const totalInfo = document.querySelector('.text-sm.text-gray-500 span:last-child');
+    if (totalInfo) {
+        totalInfo.textContent = appCards.length;
+    }
+
+    // 初始化分页UI
+    updatePaginationUI();
 
     // 为所有页码按钮添加点击事件
     pageButtons.forEach(button => {
@@ -517,49 +531,44 @@ function initPagination() {
                 // 获取点击的页码
                 const page = parseInt(this.textContent);
 
-                // 更新页码状态
-                updatePagination(page);
+                // 更新当前页码
+                currentPage = page;
 
-                // 加载对应页面的数据
-                loadPageData(page);
+                // 更新分页UI
+                updatePaginationUI();
+
+                // 显示当前页的应用
+                showCurrentPageApps();
             }
             // 如果是上一页按钮
             else if (this.querySelector('.fa-chevron-left')) {
                 if (currentPage > 1) {
-                    updatePagination(currentPage - 1);
-                    loadPageData(currentPage - 1);
+                    currentPage--;
+                    updatePaginationUI();
+                    showCurrentPageApps();
                 }
             }
             // 如果是下一页按钮
             else if (this.querySelector('.fa-chevron-right')) {
                 if (currentPage < totalPages) {
-                    updatePagination(currentPage + 1);
-                    loadPageData(currentPage + 1);
+                    currentPage++;
+                    updatePaginationUI();
+                    showCurrentPageApps();
                 }
             }
         });
     });
 
-    // 为每页显示数量选择器添加事件
-    if (perPageSelect) {
-        perPageSelect.addEventListener('change', function() {
-            const perPage = parseInt(this.value);
-            console.log('每页显示:', perPage);
-            // 重置到第一页并加载数据
-            updatePagination(1);
-            loadPageData(1, perPage);
-        });
-    }
+    // 初始显示第一页的应用
+    showCurrentPageApps();
 
     // 更新分页UI
-    function updatePagination(page) {
-        currentPage = page;
-
+    function updatePaginationUI() {
         // 更新页码按钮状态
         pageButtons.forEach(button => {
             if (!isNaN(button.textContent)) {
                 const buttonPage = parseInt(button.textContent);
-                if (buttonPage === page) {
+                if (buttonPage === currentPage) {
                     button.classList.remove('btn-light');
                     button.classList.add('btn-primary');
                 } else {
@@ -570,19 +579,33 @@ function initPagination() {
         });
 
         // 更新显示信息
-        const startItem = (page - 1) * 8 + 1;
-        const endItem = Math.min(page * 8, 24); // 假设总共有24个应用
+        const startItem = (currentPage - 1) * perPage + 1;
+        const endItem = Math.min(currentPage * perPage, appCards.length);
         const displayInfo = document.querySelector('.text-sm.text-gray-500 span:first-child');
         if (displayInfo) {
             displayInfo.textContent = `${startItem}-${endItem}`;
         }
     }
 
-    // 加载页面数据
-    function loadPageData(page, perPage = 8) {
-        console.log(`加载第${page}页数据，每页${perPage}条`);
-        // 这里添加实际的数据加载逻辑
-        // 例如通过AJAX请求获取数据或者显示/隐藏当前页的应用卡片
+    // 显示当前页的应用
+    function showCurrentPageApps() {
+        // 计算当前页应该显示的应用索引范围
+        const startIndex = (currentPage - 1) * perPage;
+        const endIndex = Math.min(startIndex + perPage, appCards.length);
+
+        // 隐藏所有应用
+        appCards.forEach((card, index) => {
+            if (index >= startIndex && index < endIndex) {
+                card.style.display = '';
+                // 重新触发动画
+                card.classList.remove('animate-visible');
+                setTimeout(() => {
+                    card.classList.add('animate-visible');
+                }, 50);
+            } else {
+                card.style.display = 'none';
+            }
+        });
     }
 }
 
@@ -649,11 +672,14 @@ function initAppCategories() {
 
     // 过滤应用卡片
     function filterAppCards(category) {
+        let visibleCards = 0;
+
         appCards.forEach(card => {
             const cardCategories = card.getAttribute('data-category')?.split(',') || [];
 
             if (category === 'all' || cardCategories.includes(category)) {
                 card.style.display = '';
+                visibleCards++;
                 // 重新触发动画
                 card.classList.remove('animate-visible');
                 setTimeout(() => {
@@ -665,24 +691,24 @@ function initAppCategories() {
         });
 
         // 更新分页信息
-        updatePaginationInfo();
+        updatePaginationInfo(visibleCards);
+
+        // 重新初始化分页
+        initPagination();
     }
 
     // 更新分页信息
-    function updatePaginationInfo() {
-        const visibleCards = document.querySelectorAll('.app-card[style="display: "]').length;
-        const totalCards = appCards.length;
-
+    function updatePaginationInfo(visibleCards) {
         // 更新显示信息
         const displayInfo = document.querySelector('.text-sm.text-gray-500 span:first-child');
         if (displayInfo) {
-            displayInfo.textContent = `1-${visibleCards}`;
+            displayInfo.textContent = `1-${Math.min(8, visibleCards)}`;
         }
 
         // 更新总数
         const totalInfo = document.querySelector('.text-sm.text-gray-500 span:last-child');
         if (totalInfo) {
-            totalInfo.textContent = `${totalCards}`;
+            totalInfo.textContent = visibleCards;
         }
     }
 }
