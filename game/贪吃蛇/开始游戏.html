@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 贪吃的宇楠 - 经典贪吃蛇游戏</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           现代化贪吃蛇游戏样式系统
+           =========================================== */
+
+        /* 重置默认样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* CSS变量 - 游戏主题色 */
+        :root {
+            --primary-green: #00ff88;
+            --dark-green: #00cc66;
+            --neon-blue: #00d4ff;
+            --electric-purple: #8b5cf6;
+            --danger-red: #ff4757;
+            --warning-orange: #ffa726;
+            --bg-dark: #0f0f23;
+            --bg-card: #1a1a2e;
+            --bg-game: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --shadow-neon: 0 0 20px rgba(0, 255, 136, 0.3);
+            --shadow-glow: 0 0 40px rgba(0, 212, 255, 0.2);
+        }
+
+        /* 页面整体布局 */
+        body {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-primary);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 背景动画效果 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 游戏标题 */
+        .game-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 30px rgba(0, 255, 136, 0.5); }
+            100% { text-shadow: 0 0 50px rgba(0, 255, 136, 0.8), 0 0 70px rgba(0, 212, 255, 0.3); }
+        }
+
+        /* 游戏主容器 */
+        #game-container {
+            position: relative;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 
+                var(--shadow-glow),
+                inset 0 0 50px rgba(0, 255, 136, 0.05);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* 游戏信息栏 */
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--bg-game);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        /* 分数显示 */
+        #score {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+            animation: scoreGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes scoreGlow {
+            0% { color: var(--primary-green); }
+            100% { color: var(--neon-blue); }
+        }
+
+        /* 游戏状态指示器 */
+        .game-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-green);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.8);
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+        /* 游戏区域布局 */
+        .game-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        /* 进度条样式 */
+        #progress-bar {
+            background: var(--bg-game);
+            border-radius: 10px;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            box-shadow: inset 0 0 10px rgba(0, 255, 136, 0.1);
+        }
+
+        /* 侧边文本区域 */
+        #left-text, #right-text {
+            background: var(--bg-game);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        /* 主游戏画布 */
+        #game-canvas {
+            border: 3px solid;
+            border-image: linear-gradient(45deg, var(--primary-green), var(--neon-blue), var(--electric-purple)) 1;
+            background: var(--bg-game);
+            border-radius: 15px;
+            box-shadow: 
+                var(--shadow-neon),
+                inset 0 0 30px rgba(0, 255, 136, 0.1);
+            position: relative;
+        }
+
+        #game-canvas::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, var(--primary-green), var(--neon-blue), var(--electric-purple));
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* 按钮通用样式 */
+        .game-btn {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .game-btn:hover::before {
+            left: 100%;
+        }
+
+        /* 开始按钮样式 */
+        .start-btn {
+            background: linear-gradient(45deg, var(--primary-green), var(--dark-green));
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 255, 136, 0.4);
+            background: linear-gradient(45deg, var(--dark-green), var(--primary-green));
+        }
+
+        /* 重新开始按钮样式 */
+        .restart-btn {
+            background: linear-gradient(45deg, var(--danger-red), #ff3742);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.3);
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 71, 87, 0.4);
+        }
+
+        /* 游戏弹窗样式 */
+        .game-modal {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-card);
+            border: 2px solid rgba(0, 255, 136, 0.5);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 
+                var(--shadow-glow),
+                inset 0 0 30px rgba(0, 255, 136, 0.1);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+        }
+
+        .game-modal.show {
+            display: block;
+            animation: modalSlideIn 0.5s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* 弹窗标题 */
+        .modal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 最终分数显示 */
+        #final-score {
+            font-size: 1.3rem;
+            color: var(--warning-orange);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* 游戏说明 */
+        .game-instructions {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            opacity: 1;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .game-instructions.fade-out {
+            opacity: 0.3;
+            transform: scale(0.95);
+        }
+
+        .game-instructions.hidden {
+            display: none;
+        }
+
+        .controls-hint {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .control-key {
+            background: var(--bg-game);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            color: var(--primary-green);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            min-width: 30px;
+            text-align: center;
+        }
+
+        /* 隐藏的图片资源 */
+        .hidden-images {
+            display: none;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .game-title {
+                font-size: 2rem;
+                top: 10px;
+            }
+            
+            #game-container {
+                padding: 20px;
+            }
+            
+            .game-area {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 1.5rem;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            #score {
+                font-size: 1.2rem;
+            }
+            
+            .game-btn {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+            
+                         .game-instructions {
+                 font-size: 0.8rem;
+                 padding: 10px 15px;
+                 margin-top: 15px;
+             }
+             
+             .controls-hint {
+                 flex-direction: column;
+                 gap: 10px;
+             }
+             
+             .controls-hint > span {
+                 font-size: 0.75rem;
+             }
+        }
+
+        /* 加载动画 */
+        @keyframes gameLoad {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        #game-container {
+            animation: gameLoad 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- 游戏标题 -->
+    <h1 class="game-title">🐍 贪吃的宇楠</h1>
+
+    <!-- 隐藏的图片资源 -->
+    <div class="hidden-images">
+        <img id="snake-head" src="pic/snake-head.png" alt="蛇头">
+    </div>
+
+    <!-- 游戏主容器 -->
+    <div id="game-container">
+        <!-- 游戏信息栏 -->
+        <div class="game-info">
+            <div id="score">分数: 0</div>
+            <div class="game-status">
+                <div class="status-dot"></div>
+                <span>READY</span>
+            </div>
+        </div>
+
+        <!-- 游戏区域 -->
+        <div class="game-area">
+            <canvas id="progress-bar" width="40" height="800"></canvas>
+            <canvas id="left-text" width="60" height="800"></canvas>
+            <canvas id="game-canvas" width="800" height="800"></canvas>
+            <canvas id="right-text" width="60" height="800"></canvas>
+            <canvas id="tip-text" style="position: absolute; left: -400px; bottom: 10px;"></canvas>
+        </div>
+
+        <!-- 游戏开始菜单 -->
+        <div id="start-menu" class="game-modal">
+            <h2 class="modal-title">准备开始</h2>
+            <p style="margin-bottom: 30px; color: var(--text-secondary); font-size: 1.1rem;">
+                控制贪吃蛇吃掉食物，避免撞到自己！
+            </p>
+            <button id="start-btn" class="game-btn start-btn">开始游戏</button>
+        </div>
+
+        <!-- 游戏结束弹窗 -->
+        <div id="game-over" class="game-modal">
+            <h2 class="modal-title">游戏结束</h2>
+            <p id="final-score">最终分数: 0</p>
+            <button id="restart-btn" class="game-btn restart-btn">重新开始</button>
+        </div>
+    </div>
+
+    <!-- 游戏控制说明 -->
+    <div class="game-instructions" id="game-instructions">
+        <div class="controls-hint">
+            <span>使用方向键控制:</span>
+            <div class="control-key">↑</div>
+            <div class="control-key">↓</div>
+            <div class="control-key">←</div>
+            <div class="control-key">→</div>
+            <span>或 WASD 键</span>
+        </div>
+    </div>
+
+    <!-- 游戏逻辑脚本 -->
+    <script src="game.js"></script>
+    
+    <!-- 控制说明管理脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const gameInstructions = document.getElementById('game-instructions');
+            const startMenu = document.getElementById('start-menu');
+            const gameOver = document.getElementById('game-over');
+            
+            // 监听游戏开始
+            const startBtn = document.getElementById('start-btn');
+            if (startBtn) {
+                startBtn.addEventListener('click', function() {
+                    // 游戏开始时让控制说明淡出
+                    setTimeout(() => {
+                        if (gameInstructions) {
+                            gameInstructions.classList.add('fade-out');
+                        }
+                    }, 2000); // 2秒后开始淡出
+                    
+                    // 5秒后完全隐藏
+                    setTimeout(() => {
+                        if (gameInstructions) {
+                            gameInstructions.classList.add('hidden');
+                        }
+                    }, 8000);
+                });
+            }
+            
+            // 游戏结束时重新显示控制说明
+            const restartBtn = document.getElementById('restart-btn');
+            if (restartBtn) {
+                restartBtn.addEventListener('click', function() {
+                    if (gameInstructions) {
+                        gameInstructions.classList.remove('fade-out', 'hidden');
+                    }
+                });
+            }
+            
+            // 检测任意按键开始游戏时也触发淡出
+            document.addEventListener('keydown', function(e) {
+                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd', 'W', 'A', 'S', 'D'].includes(e.key)) {
+                    // 如果游戏还没开始，按键后淡出说明
+                    if (startMenu && startMenu.style.display !== 'none' && !startMenu.classList.contains('show')) {
+                        setTimeout(() => {
+                            if (gameInstructions && !gameInstructions.classList.contains('fade-out')) {
+                                gameInstructions.classList.add('fade-out');
+                            }
+                        }, 1000);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
