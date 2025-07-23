@@ -63,6 +63,13 @@ html {
     zoom: 0.9;
 }
 
+/* 移动端禁用缩放 */
+@media (max-width: 768px) {
+    html {
+        zoom: 1;
+    }
+}
+
 /* 亮色主题 */
 body.light-theme {
     background: var(--light-bg);
@@ -110,6 +117,41 @@ body.light-theme {
     margin-right: 24px;
 }
 
+/* 头部按钮通用样式 */
+.header-btn {
+    width: 48px;
+    height: 48px;
+    background: var(--dark-search-bg);
+    border: 1px solid var(--dark-search-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px var(--dark-shadow);
+    box-sizing: border-box;
+}
+
+.light-theme .header-btn {
+    background: var(--light-search-bg);
+    border: 1px solid var(--light-search-border);
+    box-shadow: 0 2px 8px var(--light-shadow);
+}
+
+.header-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--dark-shadow-hover);
+}
+
+.light-theme .header-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px var(--light-shadow-hover);
+}
+
 /* 主题切换按钮 */
 .theme-toggle-btn {
     width: 48px;
@@ -123,6 +165,7 @@ body.light-theme {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 2px 8px var(--dark-shadow);
+    box-sizing: border-box;
 }
 
 .light-theme .theme-toggle-btn {
@@ -144,13 +187,18 @@ body.light-theme {
     box-shadow: 0 4px 12px var(--light-shadow-hover);
 }
 
-.theme-icon {
-    width: 24px;
-    height: 24px;
+/* 头部按钮图标通用样式 */
+.header-btn svg,
+.theme-icon,
+.calculator-icon {
+    width: 20px;
+    height: 20px;
     color: var(--dark-text);
 }
 
-.light-theme .theme-icon {
+.light-theme .header-btn svg,
+.light-theme .theme-icon,
+.light-theme .calculator-icon {
     color: var(--light-text);
 }
 
@@ -441,8 +489,9 @@ body.light-theme {
     font-weight: 500;
     transition: background-color 0.2s ease;
     min-width: 140px;
-    gap: 4px;
+    gap: 6px;
     min-height: 40px;
+    flex-direction: row;
 }
 
 .light-theme .link-card {
@@ -729,11 +778,12 @@ body.light-theme {
 /* 响应式设计 */
 @media (max-width: 768px) {
     .container {
-        padding: 100px 16px 32px;
+        padding: 120px 16px 32px;
     }
     
     .page-header {
-        padding: 10px 0;
+        padding: 12px 0;
+        min-height: auto;
     }
     
     .page-title {
@@ -757,17 +807,6 @@ body.light-theme {
     
     .date {
         font-size: 10px;
-    }
-    
-    .calculator-btn,
-    .theme-toggle-btn {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .theme-icon {
-        width: 16px;
-        height: 16px;
     }
     
     .search-engines {
@@ -799,14 +838,35 @@ body.light-theme {
     }
     
     .link-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 6px;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+        padding: 4px !important;
     }
     
     .link-card {
-        padding: 8px 10px;
-        font-size: 11px;
-        min-width: 120px;
+        min-width: unset !important;
+        width: 100% !important;
+        padding: 8px 4px !important;
+        font-size: 10px !important;
+        min-height: 45px !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 4px !important;
+    }
+    
+    .link-icon {
+        margin-right: 0 !important;
+        margin-bottom: 2px !important;
+        font-size: 14px !important;
+    }
+    
+    .link-card span:not(.link-icon) {
+        white-space: normal !important;
+        word-break: break-all !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
     }
     
     .calendar-modal-content {
@@ -817,10 +877,15 @@ body.light-theme {
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 140px 16px 32px;
+    }
+    
     .page-header {
         flex-direction: column;
         gap: 8px;
         padding: 12px 0;
+        min-height: auto;
     }
     
     .page-title {
@@ -846,17 +911,6 @@ body.light-theme {
         font-size: 9px;
     }
     
-    .calculator-btn,
-    .theme-toggle-btn {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .theme-icon {
-        width: 12px;
-        height: 12px;
-    }
-    
     .search-box {
         padding: 10px 16px;
     }
@@ -866,37 +920,134 @@ body.light-theme {
     }
     
     .search-engines {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 24px;
     }
     
     .engine-link {
         justify-content: center;
-        padding: 10px;
+        padding: 8px 12px;
+        min-width: 80px;
     }
     
     .tabs-nav {
-        flex-direction: column;
-        align-items: stretch;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding: 0 8px;
     }
     
     .tab-btn {
         justify-content: center;
-        padding: 10px;
+        padding: 8px 12px;
+        min-width: 70px;
+        white-space: nowrap;
     }
     
     .link-grid {
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+        padding: 4px !important;
     }
     
     .link-card {
-        min-width: 110px;
+        min-width: unset !important;
+        width: 100% !important;
+        padding: 6px 4px !important;
+        font-size: 9px !important;
+        min-height: 50px !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 3px !important;
+    }
+    
+    .link-icon {
+        font-size: 14px !important;
+        margin-right: 0 !important;
+        margin-bottom: 2px !important;
+    }
+    
+    .link-card span:not(.link-icon) {
+        white-space: normal !important;
+        word-break: break-all !important;
+        line-height: 1.1 !important;
+        text-align: center !important;
+    }
+    
+    .content-section {
+        padding: 12px;
+    }
+    
+    .section-title {
+        font-size: 14px;
+        margin-bottom: 12px;
     }
     
     .calendar-modal-content {
         padding: 16px;
         margin: 16px;
+    }
+}
+
+/* 超小屏幕优化 (320px及以下) */
+@media (max-width: 320px) {
+    .container {
+        padding: 150px 12px 24px;
+    }
+    
+    .page-title {
+        font-size: 14px;
+    }
+    
+    .search-box {
+        padding: 8px 12px;
+    }
+    
+    .engine-link {
+        min-width: 60px;
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+    
+    .tab-btn {
+        min-width: 60px;
+        padding: 6px 8px;
+    }
+    
+    .link-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 4px !important;
+        padding: 2px !important;
+    }
+    
+    .link-card {
+        min-width: unset !important;
+        width: 100% !important;
+        padding: 4px 2px !important;
+        font-size: 8px !important;
+        min-height: 45px !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 2px !important;
+    }
+    
+    .link-icon {
+        font-size: 12px !important;
+        margin-right: 0 !important;
+        margin-bottom: 1px !important;
+    }
+    
+    .link-card span:not(.link-icon) {
+        white-space: normal !important;
+        word-break: break-all !important;
+        line-height: 1.0 !important;
+        text-align: center !important;
     }
 }
 
@@ -948,16 +1099,7 @@ body.light-theme {
     border-color: rgba(255, 193, 7, 0.5);
 }
 
-/* 移动端优化 */
-@media (max-width: 768px) {
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .link-grid {
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-    }
-}
+/* 移动端优化 - 已整合到主要响应式样式中 */
 
 /* 添加平滑滚动 */
 html {
@@ -1319,6 +1461,8 @@ html {
     flex-shrink: 0;
 }
 
+/* 移动端图标调整 - 已整合到主要响应式样式中 */
+
 /* 链接卡片文本布局 */
 .link-card span:not(.link-icon) {
     flex: 1;
@@ -1327,6 +1471,8 @@ html {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* 移动端链接卡片文本布局 - 已整合到主要响应式样式中 */
 
 /* 模态框样式 */
 .modal-overlay {
@@ -1621,6 +1767,7 @@ html {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 2px 8px var(--dark-shadow);
+    box-sizing: border-box;
 }
 
 .light-theme .calculator-btn {
@@ -1642,13 +1789,7 @@ html {
     box-shadow: 0 4px 12px var(--light-shadow-hover);
 }
 
-.calculator-icon {
-    color: var(--dark-text);
-}
-
-.light-theme .calculator-icon {
-    color: var(--light-text);
-}
+/* 计算器图标样式已整合到头部按钮通用样式中 */
 
 /* 计算器模态框样式 */
 .calculator-modal {
