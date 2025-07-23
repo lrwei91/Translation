@@ -1,0 +1,2012 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 暗色主题变量 */
+    --dark-bg: #0f0f0f;
+    --dark-text: #ffffff;
+    --dark-text-secondary: rgba(255, 255, 255, 0.7);
+    --dark-card-bg: rgba(255, 255, 255, 0.04);
+    --dark-card-border: rgba(255, 255, 255, 0.08);
+    --dark-link-bg: rgba(255, 255, 255, 0.06);
+    --dark-link-border: rgba(255, 255, 255, 0.1);
+    --dark-search-bg: rgba(255, 255, 255, 0.06);
+    --dark-search-border: rgba(255, 255, 255, 0.12);
+    --dark-engine-bg: rgba(255, 255, 255, 0.06);
+    --dark-engine-border: rgba(255, 255, 255, 0.12);
+    --dark-tab-bg: rgba(255, 255, 255, 0.06);
+    --dark-tab-border: rgba(255, 255, 255, 0.12);
+    --dark-tab-active: rgba(59, 130, 246, 0.25);
+    --dark-tab-active-border: rgba(59, 130, 246, 0.4);
+    --dark-shadow: rgba(0, 0, 0, 0.4);
+    --dark-shadow-hover: rgba(0, 0, 0, 0.5);
+    
+    /* 亮色主题变量 - 使用更柔和的颜色 */
+    --light-bg: #fafbfc;
+    --light-text: #1a202c;
+    --light-text-secondary: rgba(26, 32, 44, 0.7);
+    --light-card-bg: rgba(255, 255, 255, 0.8);
+    --light-card-border: rgba(0, 0, 0, 0.06);
+    --light-link-bg: rgba(255, 255, 255, 0.9);
+    --light-link-border: rgba(0, 0, 0, 0.06);
+    --light-search-bg: rgba(255, 255, 255, 0.9);
+    --light-search-border: rgba(0, 0, 0, 0.06);
+    --light-engine-bg: rgba(255, 255, 255, 0.9);
+    --light-engine-border: rgba(0, 0, 0, 0.06);
+    --light-tab-bg: rgba(255, 255, 255, 0.9);
+    --light-tab-border: rgba(0, 0, 0, 0.06);
+    --light-tab-active: rgba(59, 130, 246, 0.12);
+    --light-tab-active-border: rgba(59, 130, 246, 0.25);
+    --light-shadow: rgba(0, 0, 0, 0.06);
+    --light-shadow-hover: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: var(--dark-bg);
+    color: var(--dark-text);
+    line-height: 1.6;
+    font-size: 14px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 整体缩放10% - 应用到html元素以避免点击问题 */
+html {
+    zoom: 0.9;
+}
+
+/* 亮色主题 */
+body.light-theme {
+    background: var(--light-bg);
+    color: var(--light-text);
+}
+
+/* 页面标题 */
+.page-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 1000;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.light-theme .page-header {
+    background: rgba(250, 251, 252, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.page-title {
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--dark-text);
+    margin-left: 24px;
+}
+
+.light-theme .page-title {
+    color: var(--light-text);
+}
+
+/* 顶部右侧控制区域 */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 24px;
+}
+
+/* 主题切换按钮 */
+.theme-toggle-btn {
+    width: 48px;
+    height: 48px;
+    background: var(--dark-search-bg);
+    border: 1px solid var(--dark-search-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px var(--dark-shadow);
+}
+
+.light-theme .theme-toggle-btn {
+    background: var(--light-search-bg);
+    border: 1px solid var(--light-search-border);
+    box-shadow: 0 2px 8px var(--light-shadow);
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--dark-shadow-hover);
+}
+
+.light-theme .theme-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px var(--light-shadow-hover);
+}
+
+.theme-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--dark-text);
+}
+
+.light-theme .theme-icon {
+    color: var(--light-text);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 主容器 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 20px 40px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 搜索容器 */
+.search-container {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.search-box {
+    display: inline-flex;
+    align-items: center;
+    background: var(--dark-search-bg);
+    border: 1px solid var(--dark-search-border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px var(--dark-shadow);
+    transition: border-color 0.2s ease;
+}
+
+.light-theme .search-box {
+    background: var(--light-search-bg);
+    border: 1px solid var(--light-search-border);
+    box-shadow: 0 4px 20px var(--light-shadow);
+}
+
+/* 搜索框悬停效果强化 */
+.search-box:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 25px var(--dark-shadow-hover);
+}
+
+.light-theme .search-box:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 25px var(--light-shadow-hover);
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--dark-text-secondary);
+    margin-right: 12px;
+    stroke-width: 2;
+}
+
+.light-theme .search-icon {
+    color: var(--light-text-secondary);
+}
+
+#searchInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--dark-text);
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.light-theme #searchInput {
+    color: var(--light-text);
+}
+
+#searchInput::placeholder {
+    color: var(--dark-text-secondary);
+}
+
+.light-theme #searchInput::placeholder {
+    color: var(--light-text-secondary);
+}
+
+/* 搜索引擎链接 */
+.search-engines {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.engine-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--dark-engine-bg);
+    border: 1px solid var(--dark-engine-border);
+    border-radius: 8px;
+    color: var(--dark-text);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.light-theme .engine-link {
+    background: var(--light-engine-bg);
+    border: 1px solid var(--light-engine-border);
+    color: var(--light-text);
+}
+
+/* 搜索引擎链接悬停效果强化 */
+.engine-link:hover {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.2);
+}
+
+.light-theme .engine-link:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.25);
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.15);
+}
+
+.engine-link.selected {
+    background: var(--dark-tab-active);
+    border-color: var(--dark-tab-active-border);
+    color: var(--dark-text);
+}
+
+.light-theme .engine-link.selected {
+    background: var(--light-tab-active);
+    border-color: var(--light-tab-active-border);
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.engine-icon {
+    font-size: 14px;
+}
+
+/* 分页导航 */
+.tabs-container {
+    margin-bottom: 32px;
+}
+
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: var(--dark-tab-bg);
+    border: 1px solid var(--dark-tab-border);
+    border-radius: 8px;
+    color: var(--dark-text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.light-theme .tab-btn {
+    background: var(--light-tab-bg);
+    border: 1px solid var(--light-tab-border);
+    color: var(--light-text-secondary);
+}
+
+/* 分页按钮悬停效果强化 */
+.tab-btn:hover {
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.25);
+    color: var(--dark-text);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.15);
+}
+
+.light-theme .tab-btn:hover {
+    background: rgba(59, 130, 246, 0.08);
+    border-color: rgba(59, 130, 246, 0.2);
+    color: var(--light-text);
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.1);
+}
+
+.tab-btn.active {
+    background: var(--dark-tab-active);
+    border-color: var(--dark-tab-active-border);
+    color: var(--dark-text);
+    font-weight: 600;
+}
+
+.light-theme .tab-btn.active {
+    background: var(--light-tab-active);
+    border-color: var(--light-tab-active-border);
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+/* 分页内容 */
+.tabs-content {
+    position: relative;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* 内容网格 */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.content-section {
+    background: var(--dark-card-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s ease;
+}
+
+.light-theme .content-section {
+    background: var(--light-card-bg);
+    border: 1px solid var(--light-card-border);
+}
+
+/* 内容区块悬停效果强化 */
+.content-section:hover {
+    border-color: rgba(59, 130, 246, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--dark-shadow-hover);
+}
+
+.light-theme .content-section:hover {
+    border-color: rgba(59, 130, 246, 0.15);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 25px var(--light-shadow-hover);
+}
+
+.section-title {
+    color: #3b82f6;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* 链接网格 */
+.link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    padding: 8px;
+}
+
+.link-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 12px;
+    background: var(--dark-link-bg);
+    border: 1px solid var(--dark-link-border);
+    border-radius: 6px;
+    color: var(--dark-text);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    min-width: 140px;
+    gap: 4px;
+    min-height: 40px;
+}
+
+.light-theme .link-card {
+    background: var(--light-link-bg);
+    border: 1px solid var(--light-link-border);
+    color: var(--light-text);
+}
+
+/* 链接卡片悬停效果强化 */
+.link-card:hover {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.35);
+    color: #60a5fa;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 12px rgba(59, 130, 246, 0.25);
+}
+
+.light-theme .link-card:hover {
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+    box-shadow: 0 3px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* 时钟小部件 */
+.clock-widget {
+    background: var(--dark-search-bg);
+    border: 1px solid var(--dark-search-border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+    height: 48px;
+    box-shadow: 0 2px 8px var(--dark-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.light-theme .clock-widget {
+    background: var(--light-search-bg);
+    border: 1px solid var(--light-search-border);
+    box-shadow: 0 2px 8px var(--light-shadow);
+}
+
+.clock-widget:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--dark-shadow-hover);
+}
+
+.light-theme .clock-widget:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px var(--light-shadow-hover);
+}
+
+.time {
+    color: var(--dark-text);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    line-height: 1;
+}
+
+.light-theme .time {
+    color: var(--light-text);
+}
+
+.date {
+    color: var(--dark-text-secondary);
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.light-theme .date {
+    color: var(--light-text-secondary);
+}
+
+/* 日历模态框 */
+.calendar-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: modalFadeIn 0.2s ease;
+}
+
+.calendar-modal.hidden {
+    display: none;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(8px);
+    }
+}
+
+.calendar-modal-content {
+    background: var(--dark-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 380px;
+    width: 90%;
+    color: var(--dark-text);
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: modalSlideIn 0.3s ease;
+}
+
+.light-theme .calendar-modal-content {
+    background: var(--light-bg);
+    border: 1px solid var(--light-card-border);
+    color: var(--light-text);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--dark-card-border);
+}
+
+.light-theme .calendar-header {
+    border-bottom: 1px solid var(--light-card-border);
+}
+
+.calendar-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--dark-text);
+}
+
+.light-theme .calendar-header h2 {
+    color: var(--light-text);
+}
+
+.calendar-nav-btn {
+    background: var(--dark-tab-bg);
+    border: 1px solid var(--dark-tab-border);
+    color: var(--dark-text);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.light-theme .calendar-nav-btn {
+    background: var(--light-tab-bg);
+    border: 1px solid var(--light-tab-border);
+    color: var(--light-text);
+}
+
+.calendar-nav-btn:hover {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+.light-theme .calendar-nav-btn:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.25);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+.calendar-body {
+    margin-bottom: 20px;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.calendar-weekdays div {
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--dark-text-secondary);
+    padding: 8px 4px;
+}
+
+.light-theme .calendar-weekdays div {
+    color: var(--light-text-secondary);
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-day {
+    text-align: center;
+    padding: 10px 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-day.current-month {
+    color: var(--dark-text);
+}
+
+.light-theme .calendar-day.current-month {
+    color: var(--light-text);
+}
+
+.calendar-day.other-month {
+    color: var(--dark-text-secondary);
+    opacity: 0.4;
+}
+
+.light-theme .calendar-day.other-month {
+    color: var(--light-text-secondary);
+    opacity: 0.4;
+}
+
+.calendar-day.today {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    font-weight: 600;
+    border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.calendar-day:hover {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+.light-theme .calendar-day:hover {
+    background: rgba(59, 130, 246, 0.08);
+    color: #3b82f6;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 100px 16px 32px;
+    }
+    
+    .page-header {
+        padding: 10px 0;
+    }
+    
+    .page-title {
+        font-size: 18px;
+        margin-left: 16px;
+    }
+    
+    .header-controls {
+        margin-right: 16px;
+        gap: 10px;
+    }
+    
+    .clock-widget {
+        padding: 10px 12px;
+        min-width: 90px;
+    }
+    
+    .time {
+        font-size: 16px;
+    }
+    
+    .date {
+        font-size: 10px;
+    }
+    
+    .calculator-btn,
+    .theme-toggle-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .theme-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .search-engines {
+        gap: 8px;
+    }
+    
+    .engine-link {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .tabs-nav {
+        gap: 6px;
+        padding: 0 12px;
+    }
+    
+    .tab-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .content-section {
+        padding: 16px;
+    }
+    
+    .link-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 6px;
+    }
+    
+    .link-card {
+        padding: 8px 10px;
+        font-size: 11px;
+        min-width: 120px;
+    }
+    
+    .calendar-modal-content {
+        padding: 20px;
+        margin: 20px;
+        max-width: 340px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 0;
+    }
+    
+    .page-title {
+        margin-left: 0;
+        font-size: 16px;
+    }
+    
+    .header-controls {
+        margin-right: 0;
+        gap: 8px;
+    }
+    
+    .clock-widget {
+        padding: 8px 10px;
+        min-width: 80px;
+    }
+    
+    .time {
+        font-size: 14px;
+    }
+    
+    .date {
+        font-size: 9px;
+    }
+    
+    .calculator-btn,
+    .theme-toggle-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .theme-icon {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .search-box {
+        padding: 10px 16px;
+    }
+    
+    #searchInput {
+        font-size: 14px;
+    }
+    
+    .search-engines {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+    
+    .engine-link {
+        justify-content: center;
+        padding: 10px;
+    }
+    
+    .tabs-nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .tab-btn {
+        justify-content: center;
+        padding: 10px;
+    }
+    
+    .link-grid {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    }
+    
+    .link-card {
+        min-width: 110px;
+    }
+    
+    .calendar-modal-content {
+        padding: 16px;
+        margin: 16px;
+    }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.light-theme ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.light-theme ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.light-theme ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* 特殊链接样式 */
+.link-card[href*="🌟"] {
+    background: rgba(255, 193, 7, 0.1);
+    border-color: rgba(255, 193, 7, 0.3);
+    color: #ffc107;
+}
+
+.light-theme .link-card[href*="🌟"] {
+    background: rgba(255, 193, 7, 0.1);
+    border-color: rgba(255, 193, 7, 0.3);
+    color: #d97706;
+}
+
+.link-card[href*="🌟"]:hover {
+    background: rgba(255, 193, 7, 0.2);
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .link-grid {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    }
+}
+
+/* 添加平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 添加分页按钮样式 */
+.add-tab-btn {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark-tab-bg) !important;
+    border: 1px dashed var(--dark-tab-border) !important;
+    border-radius: 8px;
+    color: var(--dark-text-secondary) !important;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 10px 16px !important;
+}
+
+.light-theme .add-tab-btn {
+    background: var(--light-tab-bg) !important;
+    border: 1px dashed var(--light-tab-border) !important;
+    color: var(--light-text-secondary) !important;
+}
+
+.add-tab-btn:hover {
+    background: rgba(34, 197, 94, 0.12) !important;
+    border-color: rgba(34, 197, 94, 0.25) !important;
+    color: #22c55e !important;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(34, 197, 94, 0.15);
+}
+
+.light-theme .add-tab-btn:hover {
+    background: rgba(34, 197, 94, 0.08) !important;
+    border-color: rgba(34, 197, 94, 0.2) !important;
+    color: #16a34a !important;
+    box-shadow: 0 3px 10px rgba(34, 197, 94, 0.1);
+}
+
+.add-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* 方法选择选项卡样式 */
+.add-method-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    background: var(--dark-card-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.light-theme .add-method-tabs {
+    background: var(--light-card-bg);
+    border: 1px solid var(--light-card-border);
+}
+
+.method-tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--dark-text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.light-theme .method-tab-btn {
+    color: var(--light-text-secondary);
+}
+
+.method-tab-btn:hover {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--dark-text);
+}
+
+.light-theme .method-tab-btn:hover {
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--light-text);
+}
+
+.method-tab-btn.active {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.method-tab-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* 方法面板样式 */
+.method-panel {
+    display: none;
+}
+
+.method-panel.active {
+    display: block;
+}
+
+/* 文件输入框样式 */
+.file-input {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    background: var(--dark-search-bg) !important;
+    border: 1px solid var(--dark-search-border) !important;
+    border-radius: 8px !important;
+    color: var(--dark-text) !important;
+    font-size: 14px !important;
+    transition: border-color 0.2s ease !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+}
+
+.light-theme .file-input {
+    background: var(--light-search-bg) !important;
+    border: 1px solid var(--light-search-border) !important;
+    color: var(--light-text) !important;
+}
+
+.file-input:hover {
+    border-color: rgba(147, 51, 234, 0.3) !important;
+}
+
+.file-input:focus {
+    outline: none !important;
+    border-color: rgba(147, 51, 234, 0.4) !important;
+    background: rgba(147, 51, 234, 0.05) !important;
+}
+
+/* 导入说明样式 */
+.import-instructions {
+    background: var(--dark-card-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.light-theme .import-instructions {
+    background: var(--light-card-bg);
+    border: 1px solid var(--light-card-border);
+}
+
+.import-instructions h4 {
+    margin: 0 0 12px 0;
+    color: var(--dark-text);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.light-theme .import-instructions h4 {
+    color: var(--light-text);
+}
+
+.import-instructions ol {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--dark-text-secondary);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.light-theme .import-instructions ol {
+    color: var(--light-text-secondary);
+}
+
+.import-instructions li {
+    margin-bottom: 8px;
+}
+
+.import-instructions ul {
+    margin: 8px 0 0 0;
+    padding-left: 16px;
+}
+
+.import-instructions ul li {
+    margin-bottom: 4px;
+}
+
+.import-instructions strong {
+    color: var(--dark-text);
+    font-weight: 600;
+}
+
+.light-theme .import-instructions strong {
+    color: var(--light-text);
+}
+
+/* 禁用状态的按钮 */
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* 删除按钮样式 */
+.delete-tab-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 18px;
+    height: 18px;
+    background: #ef4444;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.tab-btn:hover .delete-tab-btn {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.delete-tab-btn:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+.tab-btn {
+    position: relative;
+}
+
+/* 添加链接按钮样式 */
+.add-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--dark-link-bg);
+    border: 1px dashed var(--dark-link-border);
+    border-radius: 6px;
+    color: var(--dark-text-secondary);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.light-theme .add-link-btn {
+    background: var(--light-link-bg);
+    border: 1px dashed var(--light-link-border);
+    color: var(--light-text-secondary);
+}
+
+.add-link-btn:hover {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.25);
+    color: #22c55e;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 12px rgba(34, 197, 94, 0.2);
+}
+
+.light-theme .add-link-btn:hover {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.2);
+    color: #16a34a;
+    box-shadow: 0 3px 12px rgba(34, 197, 94, 0.15);
+}
+
+/* 删除链接按钮样式 */
+.delete-link-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    background: #ef4444;
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0;
+    transform: scale(0.8);
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.link-card:hover .delete-link-btn {
+    opacity: 1;
+    transform: scale(1);
+    animation: deleteButtonShow 0.2s ease;
+}
+
+@keyframes deleteButtonShow {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.delete-link-btn:hover {
+    background: #dc2626;
+    transform: scale(1.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    border-color: #ffffff;
+}
+
+.link-card.custom-link {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+}
+
+/* 分页图标样式 */
+.tab-icon {
+    font-size: 14px;
+    margin-right: 6px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* 链接图标样式 */
+.link-icon {
+    font-size: 16px;
+    margin-right: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* 链接卡片文本布局 */
+.link-card span:not(.link-icon) {
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 模态框样式 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: modalFadeIn 0.2s ease;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--dark-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 16px;
+    padding: 0;
+    max-width: 480px;
+    width: 90%;
+    color: var(--dark-text);
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: modalSlideIn 0.3s ease;
+    overflow: hidden;
+}
+
+.light-theme .modal-content {
+    background: var(--light-bg);
+    border: 1px solid var(--light-card-border);
+    color: var(--light-text);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--dark-card-border);
+    background: var(--dark-card-bg);
+}
+
+.light-theme .modal-header {
+    border-bottom: 1px solid var(--light-card-border);
+    background: var(--light-card-bg);
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--dark-text);
+}
+
+.light-theme .modal-header h3 {
+    color: var(--light-text);
+}
+
+.modal-close-btn {
+    background: var(--dark-tab-bg);
+    border: 1px solid var(--dark-tab-border);
+    color: var(--dark-text);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.light-theme .modal-close-btn {
+    background: var(--light-tab-bg);
+    border: 1px solid var(--light-tab-border);
+    color: var(--light-text);
+}
+
+.modal-close-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark-text);
+    margin-bottom: 8px;
+}
+
+.light-theme .form-group label {
+    color: var(--light-text);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--dark-search-bg);
+    border: 1px solid var(--dark-search-border);
+    border-radius: 8px;
+    color: var(--dark-text);
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.light-theme .form-group input {
+    background: var(--light-search-bg);
+    border: 1px solid var(--light-search-border);
+    color: var(--light-text);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.form-group input::placeholder {
+    color: var(--dark-text-secondary);
+}
+
+.light-theme .form-group input::placeholder {
+    color: var(--light-text-secondary);
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* 按钮样式 */
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid;
+    min-width: 80px;
+}
+
+.btn-cancel {
+    background: var(--dark-tab-bg);
+    border-color: var(--dark-tab-border);
+    color: var(--dark-text-secondary);
+}
+
+.light-theme .btn-cancel {
+    background: var(--light-tab-bg);
+    border-color: var(--light-tab-border);
+    color: var(--light-text-secondary);
+}
+
+.btn-cancel:hover {
+    background: rgba(156, 163, 175, 0.15);
+    border-color: rgba(156, 163, 175, 0.3);
+    color: var(--dark-text);
+}
+
+.light-theme .btn-cancel:hover {
+    background: rgba(156, 163, 175, 0.1);
+    border-color: rgba(156, 163, 175, 0.25);
+    color: var(--light-text);
+}
+
+.btn-primary {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+.btn-primary:hover {
+    background: rgba(59, 130, 246, 0.25);
+    border-color: rgba(59, 130, 246, 0.4);
+    color: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.btn-danger {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.btn-danger:hover {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+/* 移动端模态框优化 */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 350px;
+        margin: 20px;
+    }
+    
+    .modal-header {
+        padding: 16px 20px;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .add-tab-btn span {
+        display: none;
+    }
+    
+    .add-tab-btn {
+        padding: 10px !important;
+        min-width: 40px;
+    }
+
+    .add-method-tabs {
+        margin-bottom: 16px;
+    }
+
+    .method-tab-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .method-tab-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .import-instructions {
+        padding: 12px;
+        margin-bottom: 16px;
+    }
+
+    .import-instructions h4 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .import-instructions ol {
+        font-size: 12px;
+    }
+
+    .import-instructions ul {
+        margin: 6px 0 0 0;
+    }
+}
+
+/* 计算器按钮样式 */
+.calculator-btn {
+    width: 48px;
+    height: 48px;
+    background: var(--dark-search-bg);
+    border: 1px solid var(--dark-search-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px var(--dark-shadow);
+}
+
+.light-theme .calculator-btn {
+    background: var(--light-search-bg);
+    border: 1px solid var(--light-search-border);
+    box-shadow: 0 2px 8px var(--light-shadow);
+}
+
+.calculator-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--dark-shadow-hover);
+}
+
+.light-theme .calculator-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px var(--light-shadow-hover);
+}
+
+.calculator-icon {
+    color: var(--dark-text);
+}
+
+.light-theme .calculator-icon {
+    color: var(--light-text);
+}
+
+/* 计算器模态框样式 */
+.calculator-modal {
+    max-width: 500px;
+    width: 90vw;
+}
+
+.calculator-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calculator-control-btn {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid var(--dark-tab-border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--dark-text-secondary);
+}
+
+.light-theme .calculator-control-btn {
+    border-color: var(--light-tab-border);
+    color: var(--light-text-secondary);
+}
+
+.calculator-control-btn:hover {
+    background: var(--dark-tab-bg);
+    border-color: var(--dark-tab-active-border);
+    color: var(--dark-text);
+}
+
+.light-theme .calculator-control-btn:hover {
+    background: var(--light-tab-bg);
+    border-color: var(--light-tab-active-border);
+    color: var(--light-text);
+}
+
+.calculator-container {
+    display: flex;
+    gap: 20px;
+    min-height: 400px;
+}
+
+/* 计算器主体 */
+.calculator-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.calculator-display {
+    background: var(--dark-card-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    text-align: right;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.light-theme .calculator-display {
+    background: var(--light-card-bg);
+    border-color: var(--light-card-border);
+}
+
+.calculation-expression {
+    font-size: 14px;
+    color: var(--dark-text-secondary);
+    margin-bottom: 8px;
+    min-height: 20px;
+    word-break: break-all;
+}
+
+.light-theme .calculation-expression {
+    color: var(--light-text-secondary);
+}
+
+.calculation-result {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--dark-text);
+    min-height: 36px;
+    word-break: break-all;
+}
+
+.light-theme .calculation-result {
+    color: var(--light-text);
+}
+
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    flex: 1;
+}
+
+.calc-btn {
+    height: 50px;
+    border: 1px solid var(--dark-tab-border);
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.light-theme .calc-btn {
+    border-color: var(--light-tab-border);
+}
+
+/* 数字按钮 */
+.calc-btn-number {
+    background: var(--dark-link-bg);
+    color: var(--dark-text);
+}
+
+.light-theme .calc-btn-number {
+    background: var(--light-link-bg);
+    color: var(--light-text);
+}
+
+.calc-btn-number:hover {
+    background: var(--dark-tab-bg);
+    border-color: var(--dark-tab-active-border);
+    transform: translateY(-1px);
+}
+
+.light-theme .calc-btn-number:hover {
+    background: var(--light-tab-bg);
+    border-color: var(--light-tab-active-border);
+}
+
+/* 运算符按钮 */
+.calc-btn-operator {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.calc-btn-operator:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-1px);
+}
+
+/* 等号按钮 */
+.calc-btn-equals {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.calc-btn-equals:hover {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.3);
+    transform: translateY(-1px);
+}
+
+/* 清除按钮 */
+.calc-btn-clear, .calc-btn-backspace {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.calc-btn-clear:hover, .calc-btn-backspace:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.3);
+    transform: translateY(-1px);
+}
+
+/* 零按钮跨两列 */
+.calc-btn-zero {
+    grid-column: span 2;
+}
+
+/* 历史记录面板 */
+.calculator-history {
+    width: 200px;
+    background: var(--dark-card-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.light-theme .calculator-history {
+    background: var(--light-card-bg);
+    border-color: var(--light-card-border);
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--dark-tab-border);
+}
+
+.light-theme .history-header {
+    border-bottom-color: var(--light-tab-border);
+}
+
+.history-header h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark-text);
+}
+
+.light-theme .history-header h4 {
+    color: var(--light-text);
+}
+
+.clear-history-btn {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-text-secondary);
+    transition: all 0.2s ease;
+}
+
+.light-theme .clear-history-btn {
+    color: var(--light-text-secondary);
+}
+
+.clear-history-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.history-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.history-empty {
+    text-align: center;
+    color: var(--dark-text-secondary);
+    font-size: 14px;
+    padding: 20px 0;
+}
+
+.light-theme .history-empty {
+    color: var(--light-text-secondary);
+}
+
+.history-item {
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background: var(--dark-tab-bg);
+    border: 1px solid var(--dark-tab-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.light-theme .history-item {
+    background: var(--light-tab-bg);
+    border-color: var(--light-tab-border);
+}
+
+.history-item:hover {
+    background: var(--dark-tab-active);
+    border-color: var(--dark-tab-active-border);
+}
+
+.light-theme .history-item:hover {
+    background: var(--light-tab-active);
+    border-color: var(--light-tab-active-border);
+}
+
+.history-expression {
+    font-size: 12px;
+    color: var(--dark-text-secondary);
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+
+.light-theme .history-expression {
+    color: var(--light-text-secondary);
+}
+
+.history-result {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark-text);
+    word-break: break-all;
+}
+
+.light-theme .history-result {
+    color: var(--light-text);
+}
+
+.history-time {
+    font-size: 11px;
+    color: var(--dark-text-secondary);
+    margin-top: 4px;
+}
+
+.light-theme .history-time {
+    color: var(--light-text-secondary);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .calculator-modal {
+        max-width: 350px;
+        width: 95vw;
+    }
+
+    .calculator-container {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .calculator-history {
+        width: 100%;
+        max-height: 200px;
+    }
+
+    .calc-btn {
+        height: 45px;
+        font-size: 14px;
+    }
+
+    .calculation-result {
+        font-size: 24px;
+    }
+
+    .calculation-expression {
+        font-size: 12px;
+    }
+
+    .calculator-display {
+        padding: 12px;
+        min-height: 70px;
+    }
+} 

@@ -3,208 +3,1203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>基础翻译</title>
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 现代化样式 -->
-    <link rel="stylesheet" href="css/modern-styles.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            500: '#4f46e5',
-                            600: '#4338ca',
-                            700: '#3730a3'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <title>导航页</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-50">
-    <!-- 侧边栏 -->
-    <div class="sidebar">
-        <div class="sidebar-logo">
-            <i class="fas fa-language"></i>
-            <span>松果翻译</span>
+<body>
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <h1 class="page-title">🐟鲤鱼导航页</h1>
+        <div class="header-controls">
+            <button class="calculator-btn" id="calculatorBtn" title="打开计算器">
+                <svg class="calculator-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                    <line x1="8" y1="6" x2="16" y2="6"></line>
+                    <line x1="8" y1="10" x2="16" y2="10"></line>
+                    <line x1="8" y1="14" x2="16" y2="14"></line>
+                    <line x1="8" y1="18" x2="16" y2="18"></line>
+                </svg>
+            </button>
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="切换主题" title="切换主题">
+                <svg class="theme-icon" id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="theme-icon hidden" id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+            <div class="clock-widget">
+                <div class="time" id="currentTime"></div>
+                <div class="date" id="currentDate"></div>
+            </div>
         </div>
-        <div class="nav-item active" data-link="index.html">
-            <i class="fas fa-language"></i>
-            <span>基础翻译</span>
+    </header>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 搜索框 -->
+        <div class="search-container">
+            <div class="search-box">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="searchInput" placeholder="探索，从这里开始...">
+            </div>
         </div>
-        <div class="nav-item" data-link="app.html">
-            <i class="fas fa-th-large"></i>
-            <span>翻译应用</span>
+
+        <!-- 搜索引擎快捷方式 -->
+        <div class="search-engines">
+            <a href="https://www.google.com" class="engine-link" data-name="Google">
+                <span class="engine-icon">🔍</span>
+                <span>Google</span>
+            </a>
+            <a href="https://github.com" class="engine-link" data-name="GitHub">
+                <span class="engine-icon">🐱</span>
+                <span>GitHub</span>
+            </a>
+            <a href="https://www.baidu.com" class="engine-link" data-name="百度">
+                <span class="engine-icon">🅱️</span>
+                <span>百度</span>
+            </a>
+            <a href="https://duckduckgo.com" class="engine-link" data-name="DuckDuckGo">
+                <span class="engine-icon">🦆</span>
+                <span>DuckDuckGo</span>
+            </a>
+            <a href="https://www.youtube.com" class="engine-link" data-name="YouTube">
+                <span class="engine-icon">📺</span>
+                <span>YouTube</span>
+            </a>
         </div>
-        <div class="nav-item" data-link="#">
-            <i class="fas fa-history"></i>
-            <span>历史记录</span>
+
+        <!-- 分页导航 -->
+        <div class="tabs-container">
+            <div class="tabs-nav">
+                <button class="tab-btn active" data-tab="common" data-default="true">
+                    <span class="tab-icon">⭐</span>
+                    <span>常用</span>
+                </button>
+                <button class="tab-btn" data-tab="docs" data-default="true">
+                    <span class="tab-icon">📚</span>
+                    <span>项目文档</span>
+                </button>
+                <button class="tab-btn" data-tab="dev" data-default="true">
+                    <span class="tab-icon">🛠️</span>
+                    <span>开发服DEV</span>
+                </button>
+                <button class="tab-btn" data-tab="test" data-default="true">
+                    <span class="tab-icon">🧪</span>
+                    <span>测试服ST</span>
+                </button>
+                <button class="tab-btn" data-tab="fix" data-default="true">
+                    <span class="tab-icon">🚀</span>
+                    <span>交付服FIX</span>
+                </button> 
+                <button class="tab-btn" data-tab="skin" data-default="true">
+                    <span class="tab-icon">🎨</span>
+                    <span>皮肤套</span>
+                </button>
+                <button class="tab-btn" data-tab="other" data-default="true">
+                    <span class="tab-icon">⚙️</span>
+                    <span>其他后台</span>
+                </button>
+                <!-- 自定义分页会动态插入到这里 -->
+                <button class="tab-btn add-tab-btn" id="addTabBtn" title="添加新分页">
+                    <svg class="add-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>添加分页</span>
+                </button>
+            </div>
         </div>
-        <div class="nav-item" data-link="#">
-            <i class="fas fa-bookmark"></i>
-            <span>收藏夹</span>
-        </div>
-        <div class="nav-item" data-link="#">
-            <i class="fas fa-cog"></i>
-            <span>设置</span>
+
+        <!-- 分页内容区域 -->
+        <div class="tabs-content">
+            <!-- 常用分页 -->
+            <div class="tab-panel active" id="common">
+                <div class="content-grid">
+                    <div class="content-section">
+                        <h2 class="section-title">🛠️ 开发DEV</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/oye2_india_10_dev/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10套原始</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_10_auth_dev/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🔐</span>
+                                <span>认证</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_1_dev/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_dev/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_4_dev/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web4</span>
+                            </a>
+                            <a href="http://192.168.1.210:8000" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web5</span>
+                            </a>
+                            <a href="https://dev-goc.bbadev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>cocos后台地址</span>
+                            </a>
+                            <a href="https://web-goc.bbadev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>web后台地址</span>
+                            </a>
+                            <a href="https://ck-goc.bbadev.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">🔑</span>
+                                <span>认证后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🧪 测试ST</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/oye2_india_10_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10套原始</span>
+                            </a>
+                            <a href="https://test-goc.bbatest.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>cocos后台地址</span>
+                            </a>
+                            <a href="https://web-goc.bbatest.cc/user/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>web后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🚀 交付FIX</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/oye2_india_10_fix_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10套原始</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_10_auth_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🔐</span>
+                                <span>认证</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_1_fix_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_fix_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_4_fix_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web4</span>
+                            </a>
+                            <a href="http://192.168.1.210:8001" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web5</span>
+                            </a>
+                            <a href="https://10-goc.bbademo.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>cocos后台地址</span>
+                            </a>
+                            <a href="https://web1-goc.bbademo.cc/index/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>web后台地址</span>
+                            </a>
+                            <a href="https://ck-goc.bbademo.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">🔑</span>
+                                <span>认证后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-title">🔧 辅助工具</h2>
+                        <div class="link-grid">
+                            <a href="https://cd.baa360.cc:20088/index.php?m=my&f=index" target="_blank" class="link-card">
+                                <span class="link-icon">📋</span>
+                                <span>禅道</span>
+                            </a>
+                            <a href="https://cd.baa360.cc:20088/index.php?m=report&f=onlinebug&lastWeek=0&thisWeek=1&begin=&end=&isai=0&ids=&envType=0&c_begin=2025-02-11&c_end=2025-04-22&dept=0&subtype=&deptSearch=&scheduleStatus=&openedBy=&t=html#app=my" target="_blank" class="link-card">
+                                <span class="link-icon">🐛</span>
+                                <span>禅道客户反馈</span>
+                            </a>
+                            <a href="http://192.168.21.175:8082/" target="_blank" class="link-card">
+                                <span class="link-icon">🏗️</span>
+                                <span>Jenkins构建导航</span>
+                            </a>
+                            <a href="http://192.168.23.35:8091/project/test" target="_blank" class="link-card">
+                                <span class="link-icon">🤖</span>
+                                <span>自动化测试平台</span>
+                            </a>
+                            <a href="./game/贪吃蛇/开始游戏.html" target="_blank" class="link-card">
+                                <span class="link-icon">🐍</span>
+                                <span>贪吃的宇楠</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-title">🤖 AI助理</h2>
+                        <div class="link-grid">
+                            <a href="https://metaso.cn/" target="_blank" class="link-card">
+                                <span class="link-icon">🔍</span>
+                                <span>秘塔</span>
+                            </a>
+                            <a href="https://yuanbao.tencent.com/chat/naQivTmsDa" target="_blank" class="link-card">
+                                <span class="link-icon">💎</span>
+                                <span>腾讯元宝</span>
+                            </a>
+                            <a href="https://chat.deepseek.com/" target="_blank" class="link-card">
+                                <span class="link-icon">🧠</span>
+                                <span>DeepSeek</span>
+                            </a>
+                            <a href="https://grok.com/" target="_blank" class="link-card">
+                                <span class="link-icon">⚡</span>
+                                <span>Grok3</span>
+                            </a>
+                            <a href="https://api.v3.cm/register?aff=shn2" target="_blank" class="link-card">
+                                <span class="link-icon">🔌</span>
+                                <span>三方API</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 项目文档分页 -->
+            <div class="tab-panel" id="docs">
+                <div class="content-grid">
+                    <div class="content-section">
+                        <h2 class="section-title">📊 项目文档</h2>
+                        <div class="link-grid">
+                            <a href="https://docs.google.com/spreadsheets/d/1IGj1gIpaIDReUHCbemZpww0brmHa22YYm5uRjum2dnE/edit?gid=393060471#gid=393060471" target="_blank" class="link-card">
+                                <span class="link-icon">📋</span>
+                                <span>web5.0问题汇总</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1cD6pBYlyGvNZCjOVeJIzRArtR7FqSuQWRhlXJagaSyY/edit?gid=294771485#gid=294771485" target="_blank" class="link-card">
+                                <span class="link-icon">📈</span>
+                                <span>一部QA日报</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1VJ33mL_ddAFZfI7niLm5iUIOLuDRf-QqmSdXZI7vOFU/edit?gid=1149989571#gid=1149989571" target="_blank" class="link-card">
+                                <span class="link-icon">📝</span>
+                                <span>一部主要事项</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1TYMTiHqWdMFdJti79eNnM_aqhLnMlrs9mBjc9shcSFA/edit?gid=286280307#gid=286280307" target="_blank" class="link-card">
+                                <span class="link-icon">📝</span>
+                                <span>三部主要事项</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1QlmmKi7lK5Xw6jT-tG611_bayl6QExXNVh51kHbEc1E/edit?gid=823252870#gid=823252870" target="_blank" class="link-card">
+                                <span class="link-icon">🚚</span>
+                                <span>版本交付</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/13C0_kaOy8wo0tdFiyl7v9si0Ai3551VpH4cBmO57lwE/edit?gid=1559542566#gid=1559542566" target="_blank" class="link-card">
+                                <span class="link-icon">📋</span>
+                                <span>EGC任务总表</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1Gfli-kPMO06D42x7XTH275eGo_3VFIbXCeaIewzfYHo/edit?gid=2023098010#gid=2023098010" target="_blank" class="link-card">
+                                <span class="link-icon">💡</span>
+                                <span>FG官网需求池</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1eafWP18iWnoAIsrabY9WWJ2q_uBM_YsK3yfUKYDlcFw/edit?gid=724226873#gid=724226873" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>单一游戏</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-title">🎨 美术Figma</h2>
+                        <div class="link-grid">
+                            <a href="https://www.figma.com/design/Rol7AbDaqijqFB1PjBknD4/website?node-id=0-1&p=f&m=dev" target="_blank" class="link-card">
+                                <span class="link-icon">🖼️</span>
+                                <span>新官网前端</span>
+                            </a>
+                            <a href="https://www.figma.com/design/vGUINnRoT35SKlaQgcedCk/FG%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F?node-id=0-1&p=f&t=N57SAFqKiUjvfKBL-0" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>新官网后台</span>
+                            </a>
+                            <a href="https://www.figma.com/design/17Xzeq9zAHNJQ9DgQsIFZr/AI%E7%BF%BB%E8%AF%91?node-id=298-8000&t=hwkOsjA8kKQ9ABWo-0" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>松果翻译</span>
+                            </a>
+                            <a href="https://www.figma.com/design/HZt53PYLYemPOJQAzW0H2G/web5-cocos12?node-id=76-26&p=f&t=acM2aM64CviC0xix-0" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web5</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 开发服DEV分页 -->
+            <div class="tab-panel" id="dev">
+                <div class="content-grid">
+                    <div class="content-section">
+                        <h2 class="section-title">🎮 大厅Cocos</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/oye2_india_10_dev/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10套原始</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_12_dev/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>12套原始</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_13_dev/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>13套原始</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_15_dev/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>15套原始</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_10_auth_dev/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🔐</span>
+                                <span>认证</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_9_dev/web-desktop/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>9套原始</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🌐 大厅Web</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/webqp_1_dev/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_dev/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_4_dev/dist/#/home" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web4</span>
+                            </a>
+                            <a href="http://192.168.23.133:8000/home" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web5</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_25_dev/dist/#/home" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web25</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">👤 账服</h2>
+                        <div class="link-grid">
+                            <a href="https://dev-goc.bbadev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>cocos后台地址</span>
+                            </a>
+                            <a href="https://web-goc.bbadev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>web后台地址</span>
+                            </a>
+                            <a href="https://web4-goc.bbadev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>web4后台地址</span>
+                            </a>
+                            <a href="https://web25-goc.bbadev.cc/index/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>web25后台地址</span>
+                            </a>
+                            <a href="https://ck-goc.bbadev.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">🔑</span>
+                                <span>认证后台地址</span>
+                            </a>
+                            <a href="https://com-goc.bbadev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>9套后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏢 EGC/FG</h2>
+                        <div class="link-grid">
+                            <a href="https://gcdev-admin.gcdev.link" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>EGC后台地址</span>
+                            </a>
+                            <a href="https://fggcdev-admin.gcdev.link" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>FG后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">📊 数据分析</h2>
+                        <div class="link-grid">
+                            <a href="https://gcdev-report.gcdev.link" target="_blank" class="link-card">
+                                <span class="link-icon">📈</span>
+                                <span>后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏛️ 账服（EGC）总台</h2>
+                        <div class="link-grid">
+                            <a href="https://ms-pc.bbadev.cc/web/#/home" target="_blank" class="link-card">
+                                <span class="link-icon">🖼️</span>
+                                <span>前端</span>
+                            </a>
+                            <a href="https://ms-pc.bbadev.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>后台</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🌟 新官网</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.23.133:13000/" target="_blank" class="link-card">
+                                <span class="link-icon">🏠</span>
+                                <span>大厅地址</span>
+                            </a>
+                            <a href="https://fggw-dev-goc.bbqdev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏪 商户后台</h2>
+                        <div class="link-grid">
+                            <a href="https://fggcdev-merchant.gcdev.link" target="_blank" class="link-card">
+                                <span class="link-icon">💼</span>
+                                <span>开发后台</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 测试服ST分页 -->
+            <div class="tab-panel" id="test">
+                <div class="content-grid">
+                    <div class="content-section">
+                        <h2 class="section-title">🎮 大厅Cocos</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/oye2_india_10_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10套原始</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_9_st/web-desktop/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>9套原始</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🌐 大厅Web</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/webqp_1_pre_fix_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_pre_fix_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_4_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web4</span>
+                            </a>
+                            <a href="http://192.168.23.133:8001/home" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web5</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">👤 账服</h2>
+                        <div class="link-grid">
+                            <a href="https://test-goc.bbatest.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>cocos后台地址</span>
+                            </a>
+                            <a href="https://web-goc.bbatest.cc/user/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>web后台地址</span>
+                            </a>
+                            <a href="https://com-goc.bbatest.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>9套后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏢 EGC/FG（测试交付一样的）</h2>
+                        <div class="link-grid">
+                            <a href="https://egc-goc.bbadev.cc/index/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>EGC后台地址</span>
+                            </a>
+                            <a href="https://fgegc-goc.bbadev.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>FG后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">📊 数据分析</h2>
+                        <div class="link-grid">
+                            <a href="https://egc-report.bbadev.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">📈</span>
+                                <span>后台地址</span>
+                            </a>
+                            <a href="https://fgegc-data.bbadev.cc/index/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">📊</span>
+                                <span>FG数据测试后台（10-123）</span>
+                            </a>
+                            <a href="https://egc-data.bbadev.cc/index/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">📊</span>
+                                <span>EGC数据测试后台（10-123）</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏛️ 账服（EGC）总台</h2>
+                        <div class="link-grid">
+                            <a href="https://ms-pc.bbatest.cc/web/#/home" target="_blank" class="link-card">
+                                <span class="link-icon">🖼️</span>
+                                <span>前端</span>
+                            </a>
+                            <a href="https://ms-pc.bbatest.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>后台</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🌟 新官网</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.23.133:3333" target="_blank" class="link-card">
+                                <span class="link-icon">🏠</span>
+                                <span>大厅地址</span>
+                            </a>
+                            <a href="https://fggw-pre-goc.bbqdev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏪 商户后台</h2>
+                        <div class="link-grid">
+                            <a href="https://fgegc-merchant.bbadev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">💼</span>
+                                <span>测试（交付）后台</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 交付服FIX分页 -->
+            <div class="tab-panel" id="fix">
+                <div class="content-grid">
+                    <div class="content-section">
+                        <h2 class="section-title">🎮 大厅Cocos</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/oye2_india_10_fix_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10套原始</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_10_auth_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🔐</span>
+                                <span>认证</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_10_fix1_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10-1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_10_fix_2_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10-2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_12_fix_2_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10-3</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_10_fix_5_st/web-mobile/?f=UIPromoteMain" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10-5</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🌐 大厅Web</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/webqp_1_fix_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_fix_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_4_fix_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web4</span>
+                            </a>
+                            <a href="http://192.168.23.133:8002/home" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web5</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_25_fix_st/dist/#/home" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web25</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">👤 账服</h2>
+                        <div class="link-grid">
+                            <a href="https://10-goc.bbademo.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>cocos后台地址</span>
+                            </a>
+                            <a href="https://web1-goc.bbademo.cc/index/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>web后台地址</span>
+                            </a>
+                            <a href="https://ck-goc.bbademo.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">🔑</span>
+                                <span>认证后台地址</span>
+                            </a>
+                            <a href="https://10-2-goc.bbademo.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>10-2后台地址</span>
+                            </a>
+                            <a href="https://10-3-goc.bbademo.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>10-3后台地址</span>
+                            </a>
+                            <a href="https://10-5-goc.bbademo.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>10-5后台地址</span>
+                            </a>
+                            <a href="https://web25-goc.bbademo.cc/mguser/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>web25后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏢 EGC/FG（测试交付一样的）</h2>
+                        <div class="link-grid">
+                            <a href="https://egc-goc.bbadev.cc/index/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>EGC后台地址</span>
+                            </a>
+                            <a href="https://fgegc-goc.bbadev.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>FG后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 皮肤套分页 -->
+            <div class="tab-panel" id="skin">
+                <div class="content-grid">
+                    <div class="content-section">
+                        <h2 class="section-title">🎨 大厅皮肤套</h2>
+                        <div class="link-grid">
+                            <a href="http://192.168.1.210:8090/oye2_india_10_fix1_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10-1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_10_fix4_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>10-4</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_10_fix5_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🌸</span>
+                                <span>10-5</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_12_fix1_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>12-1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_12_fix2_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>12-2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_12_fix3_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">⭐</span>
+                                <span>12-3</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_12_fix4_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>12-4</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_12_fix5_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>12-5</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_13_fix1_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>13-1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_13_fix2_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">⭐</span>
+                                <span>13-2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_13_fix3_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>13-3</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_15_fix1_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>15-1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_15_fix2_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>15-2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_15_fix3_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">⭐</span>
+                                <span>15-3</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_15_fix4_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>15-4</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/oye2_india_15_fix5_st/web-mobile/?f=UIHall" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>15-5</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_1_fix1_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web1-1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_1_fix2_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web1-2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_fix1_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2-1</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_fix2_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2-2</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_fix3_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2-3</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_fix4_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2-4</span>
+                            </a>
+                            <a href="http://192.168.1.210:8090/webqp_2_fix5_st/dist/#/menu" target="_blank" class="link-card">
+                                <span class="link-icon">🌐</span>
+                                <span>web2-5</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 其他后台分页 -->
+            <div class="tab-panel" id="other">
+                <div class="content-grid">
+                    <div class="content-section">
+                        <h2 class="section-title">🎯 试玩大厅</h2>
+                        <div class="link-grid">
+                            <a href="http://fggcdev-demo.gcdev.link/web/#/game" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>FG试玩大厅开发服大厅</span>
+                            </a>
+                            <a href="https://igc-sw-pre-2-down.bbqdev.cc/web-fg/#/game" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>FG试玩大厅测试服大厅</span>
+                            </a>
+                            <a href="https://gcdev-demo.gcdev.link/web/#/game" target="_blank" class="link-card">
+                                <span class="link-icon">🎮</span>
+                                <span>试玩大厅开发大厅</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏛️ FG总台</h2>
+                        <div class="link-grid">
+                            <a href="https://fgreportapi-admin.gcdev.link/fg_web/#/login" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>开发后台地址</span>
+                            </a>
+                            <a href="https://fgreportapi.bbadev.cc/fg_web/#/login" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>测试后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏠 FG旧官网</h2>
+                        <div class="link-grid">
+                            <a href="https://fg-dev-home.bbqdev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">🖼️</span>
+                                <span>开发前端</span>
+                            </a>
+                            <a href="https://fg-dev-goc.bbqdev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>开发后台</span>
+                            </a>
+                            <a href="https://fg-pre-home.bbqdev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">🖼️</span>
+                                <span>交付前端</span>
+                            </a>
+                            <a href="https://fg-pre-goc.bbqdev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>交付后台</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">💰 CPF</h2>
+                        <div class="link-grid">
+                            <a href="https://admin-cpf-dev.bbadev.cc/#/supplierManage/statement" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>CPF开发后台地址</span>
+                            </a>
+                            <a href="https://admin-cpf-pre.bbademo.cc/#/supplierManage/statement" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>CPF交付后台地址</span>
+                            </a>
+                            <a href="https://merchant-cpf-dev.bbadev.cc/#/login?redirect=/merchantManage/statement" target="_blank" class="link-card">
+                                <span class="link-icon">💼</span>
+                                <span>开发商户CPF后台地址</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🎧 客服相关</h2>
+                        <div class="link-grid">
+                            <a href="https://kfms-dev-goc.bbadev.cc/web/#/index" target="_blank" class="link-card">
+                                <span class="link-icon">👥</span>
+                                <span>客服总台开发</span>
+                            </a>
+                            <a href="https://kfms-pre-goc.bbadev.cc/web/#/index" target="_blank" class="link-card">
+                                <span class="link-icon">👥</span>
+                                <span>客服总台交付</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🏢 IGC</h2>
+                        <div class="link-grid">
+                            <a href="https://devigc-igc.bbadev.cc/mguser/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>IGC总台</span>
+                            </a>
+                            <a href="https://igc-sw-igc.bbqdev.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">🛠️</span>
+                                <span>开发服</span>
+                            </a>
+                            <a href="https://igc-sw-pre-igc.bbqdev.cc/login/index.html" target="_blank" class="link-card">
+                                <span class="link-icon">🧪</span>
+                                <span>测试服</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">📋 工单系统</h2>
+                        <div class="link-grid">
+                            <a href="https://fg-wos.bbqdev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>开发后台</span>
+                            </a>
+                            <a href="https://fg-pre-wos.bbqdev.cc" target="_blank" class="link-card">
+                                <span class="link-icon">⚙️</span>
+                                <span>交付后台</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h2 class="section-title">🧪 静态官网</h2>
+                        <div class="link-grid">
+                            <a href="https://lab-pre.bbqdev.cc/#/home" target="_blank" class="link-card">
+                                <span class="link-icon">🔬</span>
+                                <span>实验室</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- 主内容区域 -->
-    <div class="main-content">
-        <!-- 顶部导航栏 -->
-        <div class="flex justify-between items-center mb-8">
-            <div class="animate-on-scroll">
-                <h1 class="text-3xl font-bold mb-2 text-gray-800">AI松果翻译</h1>
-                <p class="text-gray-600">快速准确的多语言翻译工具</p>
+    <!-- 添加分页模态框 -->
+    <div id="addTabModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>添加新分页</h3>
+                <button class="modal-close-btn" id="closeAddTabModal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
             </div>
+            <div class="modal-body">
+                <!-- 添加方式选择 -->
+                <div class="add-method-tabs">
+                    <button class="method-tab-btn active" data-method="manual">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        手动创建
+                    </button>
+                    <button class="method-tab-btn" data-method="import">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10,9 9,9 8,9"></polyline>
+                        </svg>
+                        导入书签
+                    </button>
+                </div>
 
-            <div class="flex items-center space-x-4">
-                <!-- 搜索栏 -->
-                <div class="search-bar w-64">
-                    <i class="fas fa-search text-gray-400"></i>
-                    <input type="text" placeholder="搜索...">
-                    <div class="user-actions">
-                        <i class="fas fa-bell notification"></i>
-                        <div class="avatar ml-2"></div>
+                <!-- 手动创建面板 -->
+                <div id="manualAddPanel" class="method-panel active">
+                    <div class="form-group">
+                        <label for="tabNameInput">分页名称:</label>
+                        <input type="text" id="tabNameInput" placeholder="请输入分页名称" maxlength="10">
+                    </div>
+                </div>
+
+                <!-- 导入书签面板 -->
+                <div id="importBookmarkPanel" class="method-panel">
+                    <div class="import-instructions">
+                        <h4>使用说明：</h4>
+                        <ol>
+                            <li>在浏览器中导出书签为HTML文件：
+                                <ul>
+                                    <li><strong>Chrome/Edge:</strong> 书签管理器 → 更多选项 → 导出书签</li>
+                                    <li><strong>Firefox:</strong> 书签 → 管理所有书签 → 导入和备份 → 导出书签为HTML</li>
+                                    <li><strong>Safari:</strong> 文件 → 导出书签</li>
+                                </ul>
+                            </li>
+                            <li>选择导出的HTML文件进行导入</li>
+                            <li>系统会将书签文件夹转换为分页，书签转换为链接</li>
+                        </ol>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookmarkFileInput">选择书签文件:</label>
+                        <input type="file" id="bookmarkFileInput" accept=".html" class="file-input">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-cancel" id="cancelAddTab">取消</button>
+                    <button class="btn btn-primary" id="confirmAddTab">确认添加</button>
+                    <button class="btn btn-primary hidden" id="confirmImportBookmark" disabled>开始导入</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加链接模态框 -->
+    <div id="addLinkModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>添加新链接</h3>
+                <button class="modal-close-btn" id="closeAddLinkModal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="linkNameInput">链接名称:</label>
+                    <input type="text" id="linkNameInput" placeholder="请输入链接名称" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="linkUrlInput">链接地址:</label>
+                    <input type="url" id="linkUrlInput" placeholder="请输入完整URL地址">
+                </div>
+                <div class="form-group">
+                    <label for="linkCategoryInput">所属分类:</label>
+                    <input type="text" id="linkCategoryInput" placeholder="请输入分类名称（可选）">
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-cancel" id="cancelAddLink">取消</button>
+                    <button class="btn btn-primary" id="confirmAddLink">确认添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认删除模态框 -->
+    <div id="confirmDeleteModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>确认删除</h3>
+                <button class="modal-close-btn" id="closeConfirmDeleteModal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteConfirmText">确认要删除吗？此操作不可撤销。</p>
+                <div class="form-actions">
+                    <button class="btn btn-cancel" id="cancelDelete">取消</button>
+                    <button class="btn btn-danger" id="confirmDelete">确认删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 计算器模态框 -->
+    <div id="calculatorModal" class="modal-overlay hidden">
+        <div class="modal-content calculator-modal">
+            <div class="modal-header">
+                <h3>计算器</h3>
+                <div class="calculator-controls">
+                    <button class="calculator-control-btn" id="historyToggleBtn" title="显示/隐藏历史记录">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3v5h5"></path>
+                            <path d="M3 8a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 4"></path>
+                            <path d="M21 21v-5h-5"></path>
+                            <path d="M21 16a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 20"></path>
+                        </svg>
+                    </button>
+                    <button class="modal-close-btn" id="closeCalculatorModal">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="calculator-container">
+                    <!-- 计算器主体 -->
+                    <div class="calculator-main">
+                        <div class="calculator-display">
+                            <div class="calculation-expression" id="calculationExpression"></div>
+                            <div class="calculation-result" id="calculationResult">0</div>
+                        </div>
+                        <div class="calculator-buttons">
+                            <button class="calc-btn calc-btn-clear" data-action="clear">C</button>
+                            <button class="calc-btn calc-btn-backspace" data-action="backspace" title="退格">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="m9 9 6 6"></path>
+                                    <path d="m15 9-6 6"></path>
+                                    <path d="M21 12H8l-4-4 4-4h13v8z"></path>
+                                </svg>
+                            </button>
+                            <button class="calc-btn calc-btn-operator" data-action="percent" title="百分号">%</button>
+                            <button class="calc-btn calc-btn-operator" data-value="/" title="除法">÷</button>
+                            
+                            <button class="calc-btn calc-btn-number" data-value="7">7</button>
+                            <button class="calc-btn calc-btn-number" data-value="8">8</button>
+                            <button class="calc-btn calc-btn-number" data-value="9">9</button>
+                            <button class="calc-btn calc-btn-operator" data-value="*" title="乘法">×</button>
+                            
+                            <button class="calc-btn calc-btn-number" data-value="4">4</button>
+                            <button class="calc-btn calc-btn-number" data-value="5">5</button>
+                            <button class="calc-btn calc-btn-number" data-value="6">6</button>
+                            <button class="calc-btn calc-btn-operator" data-value="-" title="减法">-</button>
+                            
+                            <button class="calc-btn calc-btn-number" data-value="1">1</button>
+                            <button class="calc-btn calc-btn-number" data-value="2">2</button>
+                            <button class="calc-btn calc-btn-number" data-value="3">3</button>
+                            <button class="calc-btn calc-btn-operator" data-value="+" title="加法">+</button>
+                            
+                            <button class="calc-btn calc-btn-number calc-btn-zero" data-value="0">0</button>
+                            <button class="calc-btn calc-btn-number" data-value="." title="小数点">.</button>
+                            <button class="calc-btn calc-btn-equals" data-action="equals" title="等于">=</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 历史记录面板 -->
+                    <div class="calculator-history hidden" id="calculatorHistory">
+                        <div class="history-header">
+                            <h4>历史记录</h4>
+                            <button class="clear-history-btn" id="clearHistoryBtn" title="清空历史记录">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                    <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="history-list" id="historyList">
+                            <div class="history-empty">暂无计算记录</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- 内容卡片 -->
-        <div class="card animate-on-scroll">
-
-            <h2 class="text-xl font-semibold mb-6 text-gray-800">语言选择</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-3">源语言</label>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="language-tag source active btn btn-primary">
-                            <i class="fas fa-check mr-1.5 text-xs"></i> 英语
-                        </button>
-                        <button class="language-tag source btn btn-light">
-                            简体中文
-                        </button>
-                        <button class="language-tag source btn btn-light">
-                            繁体中文
-                        </button>
-                        <button class="language-tag source btn btn-light">
-                            日语
-                        </button>
-                        <button class="language-tag source btn btn-light">
-                            韩语
-                        </button>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-3">目标语言</label>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="language-tag target btn btn-light">
-                            英语
-                        </button>
-                        <button class="language-tag target active btn btn-primary">
-                            <i class="fas fa-check mr-1.5 text-xs"></i> 简体中文
-                        </button>
-                        <button class="language-tag target btn btn-light">
-                            繁体中文
-                        </button>
-                        <button class="language-tag target btn btn-light">
-                            日语
-                        </button>
-                        <button class="language-tag target btn btn-light">
-                            韩语
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex justify-between items-center mb-6">
-                <button class="btn btn-light">
-                    <i class="fas fa-undo-alt mr-2"></i> 清除选择
-                </button>
-                <div class="badge badge-primary">翻译结果</div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <!-- 输入区域 -->
-                <div>
-                    <div class="flex justify-between items-center mb-3">
-                        <label class="block text-sm font-medium text-gray-700">输入文本</label>
-                        <div class="text-xs text-gray-500">支持多种语言输入</div>
-                    </div>
-                    <div class="relative">
-                        <textarea
-                            class="text-input w-full h-60 border border-gray-200 rounded-lg p-4 bg-white shadow-sm resize-none outline-none text-sm leading-relaxed focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-20 transition-all"
-                            placeholder="请输入需要翻译的内容..."
-                            oninput="updateInputCount(this)"></textarea>
-                        <div class="absolute bottom-3 right-3 text-gray-400 text-xs bg-white px-2 py-1 rounded-md shadow-sm">
-                            0/500 字符 | 0 词
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 输出区域 -->
-                <div>
-                    <div class="flex justify-between items-center mb-3">
-                        <label class="block text-sm font-medium text-gray-700">翻译结果</label>
-                        <div class="flex space-x-2">
-                            <button class="text-xs text-primary-500 hover:text-primary-600 transition-colors">
-                                <i class="fas fa-copy mr-1"></i> 复制
-                            </button>
-                            <button class="text-xs text-primary-500 hover:text-primary-600 transition-colors">
-                                <i class="fas fa-volume-up mr-1"></i> 朗读
-                            </button>
-                        </div>
-                    </div>
-                    <div class="translation-result border border-gray-200 rounded-lg p-4 bg-white shadow-sm h-60 overflow-auto text-sm leading-relaxed">
-                        <div class="text-gray-400 flex items-center justify-center h-full">
-                            <div class="text-center">
-                                <i class="fas fa-language text-4xl mb-2 text-gray-300"></i>
-                                <p>这里显示翻译结果...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-8">
-                <label class="block text-sm font-medium text-gray-700 mb-3">输出格式</label>
-                <div class="flex gap-6">
-                    <label class="format-option flex items-center cursor-pointer">
-                        <input type="radio" name="format" value="paragraph" checked class="mr-2 accent-primary-500">
-                        <span class="text-sm">段落翻译</span>
-                    </label>
-                    <label class="format-option flex items-center cursor-pointer">
-                        <input type="radio" name="format" value="line" class="mr-2 accent-primary-500">
-                        <span class="text-sm">行对行翻译</span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="flex justify-between items-center">
-                <button class="btn btn-light">
-                    <i class="fas fa-cog mr-2"></i> 高级设置
-                </button>
-
-                <!-- 翻译按钮 -->
-                <button class="btn btn-primary px-8 py-3" onclick="translateText()">
-                    <i class="fas fa-language mr-2"></i>
-                    <span class="font-medium">开始翻译</span>
-                </button>
-            </div>
-        </div> <!-- 卡片结束 -->
     </div>
 
-    <script src="js/script.js"></script>
+    <!-- 引入独立的JS文件 -->
+    <script src="js/theme.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/calculator.js"></script>
 </body>
-</html>
+</html> 
