@@ -261,13 +261,18 @@
                     <div class="content-section">
                         <h2 class="section-title">🤖 AI助理</h2>
                         <div class="link-grid">
+                            
+                            <a href="#" class="link-card ai-assistant-link" data-url="https://yuanbao.tencent.com/chat/naQivTmsDa" data-title="腾讯元宝">
+                                <span class="link-icon">💎</span>
+                                <span>腾讯元宝</span>
+                            </a>
+                            <a href="#" class="link-card ai-assistant-link" data-url="https://chat.qwen.ai/c/guest" data-title="阿里千问">
+                                <span class="link-icon">💬</span>
+                                <span>阿里千问</span>
+                            </a>
                             <a href="https://metaso.cn/" target="_blank" class="link-card">
                                 <span class="link-icon">🔍</span>
                                 <span>秘塔</span>
-                            </a>
-                            <a href="https://yuanbao.tencent.com/chat/naQivTmsDa" target="_blank" class="link-card">
-                                <span class="link-icon">💎</span>
-                                <span>腾讯元宝</span>
                             </a>
                             <a href="https://chat.deepseek.com/" target="_blank" class="link-card">
                                 <span class="link-icon">🧠</span>
@@ -1110,6 +1115,44 @@
         </div>
     </div>
 
+    <!-- AI助理内嵌模态框 -->
+    <div id="aiAssistantModal" class="modal-overlay hidden">
+        <div class="modal-content ai-assistant-modal">
+            <div class="modal-header">
+                <h3 id="aiAssistantTitle">AI助理</h3>
+                <div class="ai-assistant-controls">
+                    <button class="ai-assistant-control-btn" id="refreshAiBtn" title="刷新页面">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23,4 23,10 17,10"></polyline>
+                            <polyline points="1,20 1,14 7,14"></polyline>
+                            <path d="M20.49,9A9,9 0 0,0 5.64,5.64L1,10M22.35,14.36A9,9 0 0,1 7.51,18.36L12,14"></path>
+                        </svg>
+                    </button>
+                    <button class="ai-assistant-control-btn" id="openInNewTabBtn" title="在新标签页中打开">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15,3 21,3 21,9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </button>
+                    <button class="modal-close-btn" id="closeAiAssistantModal">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body ai-assistant-body">
+                <div class="ai-assistant-loading" id="aiAssistantLoading">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">正在加载AI助理...</div>
+                </div>
+                <iframe id="aiAssistantFrame" class="ai-assistant-iframe" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- 计算器模态框 -->
     <div id="calculatorModal" class="modal-overlay hidden">
         <div class="modal-content calculator-modal">
@@ -1201,5 +1244,6 @@
     <script src="js/search.js"></script>
     <script src="js/tabs.js"></script>
     <script src="js/calculator.js"></script>
+    <script src="js/ai-assistant.js"></script>
 </body>
 </html> 

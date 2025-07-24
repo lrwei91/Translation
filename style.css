@@ -2150,4 +2150,147 @@ html {
         padding: 12px;
         min-height: 70px;
     }
+}
+
+/* AI助理模态框样式 */
+.ai-assistant-modal {
+    max-width: 95vw;
+    width: 1200px;
+    max-height: 90vh;
+    height: 800px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.ai-assistant-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ai-assistant-control-btn {
+    background: none;
+    border: none;
+    color: var(--dark-text-secondary);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.ai-assistant-control-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--dark-text);
+}
+
+.light-theme .ai-assistant-control-btn {
+    color: var(--light-text-secondary);
+}
+
+.light-theme .ai-assistant-control-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--light-text);
+}
+
+.ai-assistant-body {
+    padding: 0;
+    position: relative;
+    height: calc(100% - 60px);
+    overflow: hidden;
+}
+
+.ai-assistant-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+    display: none;
+}
+
+.ai-assistant-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-card-bg);
+    color: var(--dark-text);
+    gap: 16px;
+}
+
+.light-theme .ai-assistant-loading {
+    background: var(--light-card-bg);
+    color: var(--light-text);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid rgba(59, 130, 246, 0.8);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.light-theme .loading-spinner {
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top: 3px solid rgba(59, 130, 246, 0.8);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-size: 14px;
+    color: var(--dark-text-secondary);
+}
+
+.light-theme .loading-text {
+    color: var(--light-text-secondary);
+}
+
+/* 错误状态样式 */
+.ai-assistant-loading .error-text {
+    color: var(--dark-text);
+}
+
+.light-theme .ai-assistant-loading .error-text {
+    color: var(--light-text);
+}
+
+.ai-assistant-loading button {
+    transition: all 0.2s ease;
+}
+
+.ai-assistant-loading button:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .ai-assistant-modal {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .ai-assistant-controls {
+        gap: 4px;
+    }
+
+    .ai-assistant-control-btn {
+        padding: 4px;
+    }
 } 
